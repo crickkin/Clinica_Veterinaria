@@ -7,6 +7,16 @@ public class Animal
 	private int idade;
 	private Cliente proprietario;
 	
+	//Construct
+	public Animal(String nome, String raca, String especie, boolean sexo, String idade)
+	{
+		this.nome = nome;
+		this.raca = raca;
+		this.especie = especie;
+		this.sexo = (sexo) ? 'm' : 'f';
+		this.idade = Integer.parseInt(idade);
+	}
+	
 	//Setters 'n Getters
 	public String getNome() 
 	{

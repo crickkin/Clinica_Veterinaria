@@ -1,9 +1,18 @@
 package Modelo;
 
-public class Cirurgia 
+public class Cirurgia extends Procedimento
 {
 	private String urgencia, situacao;
 	private int duracao;
+	
+	//Constructor
+	public Cirurgia(String data, String hora, String urgencia, String situacao, String duracao)
+	{
+		super(data, hora);
+		this.urgencia = urgencia;
+		this.situacao = situacao;
+		this.duracao = Integer.parseInt(duracao);
+	}
 	
 	//Setters 'n Getters
 	public String getUrgencia() 

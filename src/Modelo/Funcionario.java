@@ -6,6 +6,19 @@ public class Funcionario
 	private char genero;
 	private double salario;
 	
+	//Constructors
+	public Funcionario(String nome, String cpf, String ctps, String rg, String dtNascimento, String dtContratacao, boolean genero, String salario)
+	{
+		this.nome = nome;
+		this.cpf = cpf;
+		this.ctps = ctps;
+		this.rg = rg;
+		this.dtNascimento = dtNascimento;
+		this.dtContratacao = dtContratacao;
+		this.genero = (genero) ? 'm' : 'f';
+		this.salario = Double.parseDouble(salario);
+	}
+	
 	//Setters 'n Getters
 	public String getNome() 
 	{

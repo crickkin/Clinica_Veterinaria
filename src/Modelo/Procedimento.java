@@ -6,6 +6,13 @@ public abstract class Procedimento
 	protected Animal animal;
 	protected String veterinario;
 	
+	//Constructor
+	public Procedimento(String data, String hora)
+	{
+		this.data = data;
+		this.hora = hora;
+	}
+	
 	//Setters 'n Getters
 	public String getData() 
 	{

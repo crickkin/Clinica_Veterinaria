@@ -4,6 +4,15 @@ public class Cliente
 {
 	private String nome, cpf, telefone, email;
 
+	//Constructors
+	public Cliente(String nome, String cpf, String telefone, String email)
+	{
+		this.nome = nome;
+		this.cpf = cpf;
+		this.telefone = telefone;
+		this.email = email;
+	}
+	
 	//Setters 'n Getters
 	public String getNome() 
 	{
