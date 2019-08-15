@@ -1,6 +1,6 @@
 package Modelo;
 
-public class Cliente 
+public class Cliente
 {
 	private String nome, cpf, telefone, email;
 
@@ -14,7 +14,7 @@ public class Cliente
 	}
 	
 	//Setters 'n Getters
-	public String getNome() 
+	public String getNome()
 	{
 		return nome;
 	}
