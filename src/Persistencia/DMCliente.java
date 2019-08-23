@@ -43,22 +43,21 @@ public class DMCliente extends DMGeral {
             System.out.println("Enviando codigo SQL: " + getConnection().nativeSQL(consultarSQL));
             ResultSet result = statement.executeQuery(consultarSQL);
             if (result.next()) {
-//            	System.out.println("Pessoa Fï¿½sica existente !" );
-//                System.out.println("Pessoa Fï¿½sica");
-//                System.out.println("Cpf.............: "+ result.getString("cpf"));
-//                System.out.println("Nome...............: "+ result.getString("nome"));
-//                System.out.println("Data de Nascimento.: "+ result.getString("dataNascimento"));
+            	String info = "Cliente " + result.getString("id_cliente") + 
+            				"\nNome: " + result.getString("nome") +
+            				"\nCPF: " + result.getString("cpf") +
+            				"\nTelefone: " + result.getString("telefone") +
+            				"\nEmail: " + result.getString("email");
+            	
+            	JOptionPane.showMessageDialog(null, info, "Cliente encontrado", JOptionPane.INFORMATION_MESSAGE);
                 result.close();
-            }
-            else
-            {   
-//            	System.out.println( "Pessoa Fï¿½sica nï¿½o encontrada !\n" );
+            } else {   
+            	JOptionPane.showMessageDialog(null, "Não há clientes com esse número de CPF.", "Cliente não encontrado", JOptionPane.ERROR_MESSAGE);
                 objCli = null;
             }
             statement.close();
         }
-        catch (SQLException e)
-        { 
+        catch (SQLException e) { 
         	System.out.println("Problemas com o SQL de consulta de Cliente!"); 
         }
 		return objCli;

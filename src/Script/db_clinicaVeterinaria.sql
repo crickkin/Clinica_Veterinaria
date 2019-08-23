@@ -14,17 +14,16 @@ CREATE TABLE funcionario (
     cpf char(11) NOT NULL,
     ctps char(8) NOT NULL,
     rg char(9),
-    dtNasc date,
+    dtNasc varchar(10),
     genero char(1),
-    cargo varchar(20) NOT NULL,
     salario double NOT NULL,
-    dtContratacao date
+    dtContratacao varchar(10)
 );
 
 CREATE TABLE cliente (
     id_cliente int AUTO_INCREMENT NOT NULL PRIMARY KEY,
     nome varchar(50) NOT NULL,
-    cpf char(11),
+    cpf char(11) NOT NULL,
     telefone varchar(15) NOT NULL,
     email varchar(50)
 );
@@ -40,8 +39,8 @@ CREATE TABLE animal (
 
 CREATE TABLE consulta (
     id_consulta int AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    data date NOT NULL,
-    hora time NOT NULL,
+    data varchar(10) NOT NULL,
+    hora varchar(5) NOT NULL,
     sintomas varchar(100),
     diagnostico varchar(100),
     id_funcionario int,
@@ -50,10 +49,10 @@ CREATE TABLE consulta (
 
 CREATE TABLE cirurgia (
     id_cirurgia int AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    data date NOT NULL,
-    hora time NOT NULL,
+    data varchar(10) NOT NULL,
+    hora varchar(5) NOT NULL,
     grau_urgencia int,
-    duracao time,
+    duracao varchar(5),
     situacao varchar(100),
     id_funcionario int,
     id_animal int NOT NULL

@@ -15,7 +15,7 @@ public class Funcionario
 		this.rg = rg;
 		this.dtNascimento = dtNascimento;
 		this.dtContratacao = dtContratacao;
-		this.genero = (genero) ? 'm' : 'f';
+		this.genero = (genero) ? 'M' : 'F';
 		this.salario = Double.parseDouble(salario);
 	}
 	
