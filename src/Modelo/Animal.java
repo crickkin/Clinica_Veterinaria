@@ -4,17 +4,15 @@ public class Animal
 {
 	private String nome, raca, especie;
 	private char sexo;
-	private int idade;
 	private Cliente proprietario;
 	
 	//Construct
-	public Animal(String nome, String raca, String especie, boolean sexo, String idade)
+	public Animal(String nome, String raca, String especie, boolean sexo)
 	{
 		this.nome = nome;
 		this.raca = raca;
 		this.especie = especie;
-		this.sexo = (sexo) ? 'm' : 'f';
-		this.idade = Integer.parseInt(idade);
+		this.sexo = (sexo) ? 'M' : 'F';
 	}
 	
 	//Setters 'n Getters
@@ -51,15 +49,6 @@ public class Animal
 	public void setSexo(char sexo) 
 	{
 		this.sexo = sexo;
-	}
-	
-	public int getIdade() 
-	{
-		return idade;
-	}
-	public void setIdade(int idade) 
-	{
-		this.idade = idade;
 	}
 	
 	public Cliente getProprietario() 

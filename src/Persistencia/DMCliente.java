@@ -48,11 +48,10 @@ public class DMCliente extends DMGeral {
             				"\nCPF: " + result.getString("cpf") +
             				"\nTelefone: " + result.getString("telefone") +
             				"\nEmail: " + result.getString("email");
-            	
-            	JOptionPane.showMessageDialog(null, info, "Cliente encontrado", JOptionPane.INFORMATION_MESSAGE);
+//            	JOptionPane.showMessageDialog(null, info, "Cliente encontrado", JOptionPane.INFORMATION_MESSAGE);
                 result.close();
             } else {   
-            	JOptionPane.showMessageDialog(null, "Não há clientes com esse número de CPF.", "Cliente não encontrado", JOptionPane.ERROR_MESSAGE);
+//            	JOptionPane.showMessageDialog(null, "Nï¿½o hï¿½ clientes com esse nï¿½mero de CPF.", "Cliente nï¿½o encontrado", JOptionPane.ERROR_MESSAGE);
                 objCli = null;
             }
             statement.close();
@@ -61,6 +60,28 @@ public class DMCliente extends DMGeral {
         	System.out.println("Problemas com o SQL de consulta de Cliente!"); 
         }
 		return objCli;
+	}
+	
+	public int temAnimal(Object obj) {
+		Cliente objCli = (Cliente) obj;
+		int id;
+		try {   
+			Statement statement = getConnection().createStatement();
+			String consultarSQL = "SELECT * FROM cliente, animal WHERE (cpf = '"+objCli.getCpf()+"' and cliente.id_cliente=animal.id_cliente)";
+            System.out.println("Enviando codigo SQL: " + getConnection().nativeSQL(consultarSQL));
+            ResultSet result = statement.executeQuery(consultarSQL);
+            if (result.next()) {
+            	id = result.getInt("id_animal");
+            	result.close();
+            } else {   
+            	id = 0;
+            }
+            statement.close();
+        }
+        catch (SQLException e) { 
+        	System.out.println("Problemas com o SQL de consulta de Cliente!"); 
+        }
+		return id;
 	}
 
 	public void excluir(Object obj) {
