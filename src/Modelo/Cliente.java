@@ -1,10 +1,9 @@
 package Modelo;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import Persistencia.DMCliente;
-import modelo.Cliente;
-import modelo.Cliente;
 
 public class Cliente
 {
@@ -45,7 +44,7 @@ public class Cliente
 	{
 		this.email = email;
 	}
-	
+
 	//Constructors
 	public Cliente(String nome, String cpf, String telefone, String email)
 	{
@@ -54,15 +53,25 @@ public class Cliente
 		this.telefone = telefone;
 		this.email = email;
 		dmCli = new DMCliente();
-    	dmCli.conectaDataBase("db_clinicaVeterinaria","root","root");//Fazer a Conexao com o BD
+    	dmCli.conectaDataBase("db_clinicaVeterinaria","root","7224");//Fazer a Conexao com o BD
     	System.out.println("Conex�o feita � tabela Cliente com sucesso!");
         incluir(this);
 	}
 	
-	public Object consultar()
-    {
-		return dmCli.consultar(this);   
-    }
+	public Cliente(String cpf) {
+		this.cpf = cpf;
+		dmCli.conectaDataBase("db_clinicaVeterinaria","root","7224");//Fazer a Conexao com o BD
+    	System.out.println("Conex�o feita � tabela Cliente com sucesso!");
+	}
+	
+	public void buscar(String cpf) {
+		String info = dmCli.buscar(cpf);
+		if (info != "") {
+			JOptionPane.showMessageDialog(null,"Cliente encontrado!\n" + info,"Sucesso!",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("../Clinica_Veterinaria/src/Images/cliente_icone.png"));
+		} else {
+			JOptionPane.showMessageDialog(null, "Cliente nao encontrado!","Erro!", JOptionPane.ERROR_MESSAGE);			
+		}
+	}
 	
 	public void incluir(Cliente objCli)
     {   
@@ -79,6 +88,7 @@ public class Cliente
             else
             { 
             	dmCli.incluir(this); 
+            	JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }
@@ -96,16 +106,18 @@ public class Cliente
         		int idAnimal = dmCli.temAnimal(this); 
         		if (idAnimal != 0) 
         		{
-        			JOptionPane.showMessageDialog(null,"Este Cliente nao pode ser excluido, por ser proprietario de um animal cadastrado. \nSe deseja excluir este cliente, devera excluir o animal de id: " + idAnimal,"Mensagem de Erro",JOptionPane.ERROR_MESSAGE);
+        			JOptionPane.showMessageDialog(null,"Este Cliente nao pode ser excluido, por ser proprietario de um animal cadastrado. "
+        					+ "\nSe deseja excluir este cliente, devera excluir o animal de id: " + idAnimal,"Mensagem de Erro",JOptionPane.ERROR_MESSAGE);
         		}
         		else
         		{
-        			dmCli.excluir(this);         			
+        			dmCli.excluir(this);
+        			JOptionPane.showMessageDialog(null, "Cliente excluido com sucesso", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
         		}
         	}
             else
             {   
-            	JOptionPane.showMessageDialog(null,"Exclus�o de Cliente n�o realizada!\n Este cliente n�o existe!","Mensagem de Erro",JOptionPane.ERROR_MESSAGE);
+            	JOptionPane.showMessageDialog(null,"Exclus�o de Cliente n�o realizada!\nCliente nao encontrado!","Mensagem de Erro",JOptionPane.ERROR_MESSAGE);
             }
         }    
     }
@@ -114,11 +126,17 @@ public class Cliente
     {   
     	if (dmCli.consultar(this)!= null)
         { 
-    		dmCli.alterar(this); 
+    		dmCli.alterar(this);
+    		JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
     	}
         else
         {   
-        	JOptionPane.showMessageDialog(null,"Cliente nao encontrado!");
+        	JOptionPane.showMessageDialog(null,"Alteracao de Cliente n�o realizada!\nCliente nao encontrado!","Mensagem de Erro",JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public void shutDown()
+    {   
+    	dmCli.shutDown();   
     }
 }
