@@ -11,13 +11,13 @@ public class DMAnimal extends DMGeral {
 		Animal objAni = (Animal) obj;
 		try {   
 			Statement statement = getConnection().createStatement(); 
-//            String incluirSQL = "INSERT INTO animal (nome, raca, especie, sexo, id_cliente)"
-//            					+ " VALUES ('" +
-//                                objAni.getNome() + "', '" +
-//                                objAni.getRaca() + "', '" +
-//                                objAni.getEspecie() + "', '" +
-//                                objAni.getSexo() + "', '" +
-//                                "')";
+			String incluirSQL = "INSERT INTO animal (nome, raca, especie, sexo, id_cliente)"
+  					+ " VALUES ('" +
+                      objAni.getNome() + "', '" +
+                      objAni.getRaca() + "', '" +
+                      objAni.getEspecie() + "', '" +
+                      objAni.getSexo() + "', '" +
+                      "')";
             System.out.println("Enviando codigo SQL: " + getConnection().nativeSQL(incluirSQL) + "\n");
             int result = statement.executeUpdate(incluirSQL);
             if (result == 1) {   
@@ -27,7 +27,7 @@ public class DMAnimal extends DMGeral {
             	objAni.setNome("");
                 objAni.setRaca("");
                 objAni.setEspecie("");
-                objAni.setSexo("");
+                objAni.setSexo(' ');
             }
             statement.close();
         }
@@ -40,7 +40,7 @@ public class DMAnimal extends DMGeral {
 		Animal objAni = (Animal) obj;
 		try {   
 			Statement statement = getConnection().createStatement();
-            String consultarSQL = "SELECT * FROM animal WHERE (nome = '"+objAni.getNome()+"' AND id_cliente = '"+ID_CLIENTE+"')";
+            String consultarSQL = "SELECT * FROM animal WHERE (nome = '"+objAni.getNome()+"' AND id_cliente = '"+/*ID_CLIENTE+*/"')";
             System.out.println("Enviando codigo SQL: " + getConnection().nativeSQL(consultarSQL));
             ResultSet result = statement.executeQuery(consultarSQL);
             if (result.next()) {

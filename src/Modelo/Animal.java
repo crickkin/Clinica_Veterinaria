@@ -7,6 +7,7 @@ public class Animal
 	private Cliente proprietario;
 	
 	//Construct
+	public Animal(){};
 	public Animal(String nome, String raca, String especie, boolean sexo)
 	{
 		this.nome = nome;
