@@ -12,22 +12,22 @@ public class TelaCliente extends JFrame {
 	private JButton bSalvar, bLimpar, bListar, bBuscar, bExcluir, bEditar, bFechar, bLimparCpf;
 	private JPanel pCadastro, pBusca;
 
-	String cpf, nome, telefone, email;
-	Cliente objCli;
+	String cpf, nome, telefone, email, cpfBusca;
+	Cliente objCli, objSalvar;
 	
 	public TelaCliente()
 	{
-		//configuraï¿½ï¿½es da janela
+		
 		this.setSize(630,440);
 		this.setTitle("Tela de Gerenciamento de Cliente");
 		this.setResizable(false);
 		this.setLayout(null);
 		this.setVisible(true);
-		this.setLocationRelativeTo(null); //centraliza a janela na abertura
+		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE); 
 		
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		Image img = tk.getImage("../Clinica_Veterinaria/src/Images/cliente_icone.png");
+		Image img = tk.getImage("../Clinica_Veterinaria/src/Images/cliente_icone_preto.jpg");
 		this.setIconImage(img);
 		
 		//criando classe interna para funcionar como ouvinte dos eventos de mouse
@@ -38,7 +38,8 @@ public class TelaCliente extends JFrame {
 					cpf = tCpf.getText();
 					telefone = tTelefone.getText();
 					email = tEmail.getText();
-					objCli = new Cliente(nome,cpf,telefone, email);			
+					objSalvar = new Cliente(nome,cpf,telefone, email);	
+					objSalvar.incluir(objSalvar);
 				}
 				
 				if (e.getSource() == bLimpar) {
@@ -57,15 +58,24 @@ public class TelaCliente extends JFrame {
 //				}
 				
 				if (e.getSource() == bBuscar) {
-					objCli.buscar(tCpfBusca.getText());
+					cpfBusca = tCpfBusca.getText();
+					objCli = new Cliente(cpfBusca);
+					objCli.buscar(objCli);
 				}
 				
-//				if (e.getSource() == bExcluir) {
-//					objCli.excluir(tCpfBusca.getText());
-//				}
-//				
+				if (e.getSource() == bExcluir) {
+					cpfBusca = tCpfBusca.getText();
+					objCli = new Cliente(cpfBusca);
+					objCli.excluir(objCli);
+				}
+				
 //				if (e.getSource() == bEditar) {
-//					objCli.alterar();
+//					nome = tNome.getText();
+//					cpf = tCpf.getText();
+//					telefone = tTelefone.getText();
+//					email = tEmail.getText();
+//					objCli = new Cliente(nome,cpf,telefone, email);	
+//					objCli.alterar(objCli);
 //				}
 				
 				if (e.getSource() == bFechar) {
@@ -87,7 +97,7 @@ public class TelaCliente extends JFrame {
 		pBusca = new JPanel();
 		pBusca.setSize(610,110);
 		pBusca.setLocation(10,230);
-		pBusca.setBorder(BorderFactory.createTitledBorder("Busca, Exclusao e Alteracao"));
+		pBusca.setBorder(BorderFactory.createTitledBorder("Busca e Exclusão"));
 		pBusca.setLayout(null);
 		
 		//adicionando os labels	e text fields
@@ -134,19 +144,19 @@ public class TelaCliente extends JFrame {
 
 				
 		//adicionando os buttons
+//		bEditar = new JButton("Editar");
+//		bEditar.setSize(85,30);
+//		bEditar.setLocation(325,160);
+//		bEditar.setForeground(Color.white);
+//		bEditar.setBackground(Color.gray);
+//		bEditar.addMouseListener(action);
+		
 		bSalvar = new JButton("Salvar");
 		bSalvar.setSize(85,30);
-		bSalvar.setLocation(325,160);
+		bSalvar.setLocation(415,160);
 		bSalvar.setForeground(Color.white);
 		bSalvar.setBackground(Color.gray);
 		bSalvar.addMouseListener(action);
-		
-		bEditar = new JButton("Editar");
-		bEditar.setSize(85,30);
-		bEditar.setLocation(415,160);
-		bEditar.setForeground(Color.white);
-		bEditar.setBackground(Color.gray);
-		bEditar.addMouseListener(action);
 		
 		bLimpar = new JButton("Limpar");
 		bLimpar.setSize(85,30);
@@ -155,12 +165,12 @@ public class TelaCliente extends JFrame {
 		bLimpar.setBackground(Color.gray);
 		bLimpar.addMouseListener(action);
 		
-		bListar = new JButton("Listar");
-		bListar.setSize(85,30);
-		bListar.setLocation(235,60);
-		bListar.setForeground(Color.white);
-		bListar.setBackground(Color.gray);
-		bListar.addMouseListener(action);
+//		bListar = new JButton("Listar");
+//		bListar.setSize(85,30);
+//		bListar.setLocation(235,60);
+//		bListar.setForeground(Color.white);
+//		bListar.setBackground(Color.gray);
+//		bListar.addMouseListener(action);
 				
 		bBuscar = new JButton("Buscar");
 		bBuscar.setSize(85,30);
@@ -203,12 +213,12 @@ public class TelaCliente extends JFrame {
 		
 		pCadastro.add(bSalvar);
 		pCadastro.add(bLimpar);
-		pCadastro.add(bEditar);
+//		pCadastro.add(bEditar);
 		
 		this.add(pBusca);
 		pBusca.add(lCpfBusca);
 		pBusca.add(tCpfBusca);
-		pBusca.add(bListar);
+//		pBusca.add(bListar);
 		pBusca.add(bBuscar);
 		pBusca.add(bExcluir);
 		pBusca.add(bLimparCpf);

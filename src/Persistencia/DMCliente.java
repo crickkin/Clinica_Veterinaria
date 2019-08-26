@@ -21,10 +21,8 @@ public class DMCliente extends DMGeral {
             System.out.println("Enviando codigo SQL: " + getConnection().nativeSQL(incluirSQL) + "\n");
             int result = statement.executeUpdate(incluirSQL);
             if (result == 1) {   
-//            	JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
             	System.out.println("\nCliente cadastrado com sucesso!");
             } else {   
-//            	JOptionPane.showMessageDialog(null,"Erro ao cadastrar Cliente!","Erro",JOptionPane.ERROR_MESSAGE);
             	System.out.println("\nErro ao cadastrar cliente!");
             	objCli.setNome("");
                 objCli.setCpf("");
@@ -34,7 +32,7 @@ public class DMCliente extends DMGeral {
             statement.close();
         }
         catch (SQLException e) { 
-        	System.out.println("Problemas com o SQL de inclusao de Cliente!"); 
+        	System.out.println("Problemas com o SQL de inclusão de Cliente!"); 
         }
     }
 
@@ -43,13 +41,18 @@ public class DMCliente extends DMGeral {
 		try {   
 			Statement statement = getConnection().createStatement();
             String consultarSQL = "SELECT * FROM cliente WHERE (cpf = '"+objCli.getCpf()+"')";
-            System.out.println("Enviando codigo SQL: " + getConnection().nativeSQL(consultarSQL));
+            System.out.println("Enviando código SQL: " + getConnection().nativeSQL(consultarSQL));
             ResultSet result = statement.executeQuery(consultarSQL);
             if (result.next()) {
             	System.out.println("\nCliente encontrado!");
+            	objCli.setIdCliente(result.getInt("id_cliente"));
+            	objCli.setNome(result.getString("nome"));
+            	objCli.setCpf(result.getString("cpf"));
+            	objCli.setTelefone(result.getString("telefone"));
+            	objCli.setEmail(result.getString("email"));
                 result.close();
             } else {   
-            	System.out.println("\nCliente nao encontrado!");
+            	System.out.println("\nCliente não encontrado!");
                 objCli = null;
             }
             statement.close();
@@ -60,31 +63,32 @@ public class DMCliente extends DMGeral {
 		return objCli;
 	}
 	
-	public String buscar(String cpf) {
-		String info = "";
-		try {   
-			Statement statement = getConnection().createStatement();
-            String consultarSQL = "SELECT * FROM cliente WHERE (cpf = '"+cpf+"')";
-            System.out.println("Enviando codigo SQL: " + getConnection().nativeSQL(consultarSQL));
-            ResultSet result = statement.executeQuery(consultarSQL);
-            if (result.next()) {
-            	info = "Cliente " + result.getString("id_cliente") + 
-            				"\nNome: " + result.getString("nome") +
-            				"\nCPF: " + result.getString("cpf") +
-            				"\nTelefone: " + result.getString("telefone") +
-            				"\nEmail: " + result.getString("email");
-            	System.out.println("\nCliente encontrado!");
-                result.close();
-            } else {   
-            	System.out.println("\nCliente nao encontrado!");
-            }
-            statement.close();
-        }
-        catch (SQLException e) { 
-        	System.out.println("Problemas com o SQL de consulta de Cliente!"); 
-        }
-		return info;
-	}
+//	public String buscar(Object obj) {
+//		Cliente objCli = (Cliente) obj;
+//		String info = "";
+//		try {   
+//			Statement statement = getConnection().createStatement();
+//            String consultarSQL = "SELECT * FROM cliente WHERE (cpf = '"+objCli.getCpf()+"')";
+//            System.out.println("Enviando codigo SQL: " + getConnection().nativeSQL(consultarSQL));
+//            ResultSet result = statement.executeQuery(consultarSQL);
+//            if (result.next()) {
+//            	info = "Cliente " + result.getString("id_cliente") + 
+//            				"\nNome: " + result.getString("nome") +
+//            				"\nCPF: " + result.getString("cpf") +
+//            				"\nTelefone: " + result.getString("telefone") +
+//            				"\nEmail: " + result.getString("email");
+//            	System.out.println("\nCliente encontrado!");
+//                result.close();
+//            } else {   
+//            	System.out.println("\nCliente nao encontrado!");
+//            }
+//            statement.close();
+//        }
+//        catch (SQLException e) { 
+//        	System.out.println("Problemas com o SQL de consulta de Cliente!"); 
+//        }
+//		return info;
+//	}
 	
 	public int temAnimal(Object obj) {
 		Cliente objCli = (Cliente) obj;
@@ -92,14 +96,14 @@ public class DMCliente extends DMGeral {
 		try {   
 			Statement statement = getConnection().createStatement();
 			String consultarSQL = "SELECT * FROM cliente, animal WHERE (cpf = '"+objCli.getCpf()+"' and cliente.id_cliente=animal.id_cliente)";
-            System.out.println("Enviando codigo SQL: " + getConnection().nativeSQL(consultarSQL));
+            System.out.println("Enviando código SQL: " + getConnection().nativeSQL(consultarSQL));
             ResultSet result = statement.executeQuery(consultarSQL);
             if (result.next()) {
             	System.out.println("\nCliente tem animal cadastrado");
             	id = result.getInt("id_animal");
             	result.close();
             } else {  
-            	System.out.println("\nCliente nao tem animal cadastrado");
+            	System.out.println("\nCliente não tem animal cadastrado");
             	id = 0;
             	objCli = null;
             }
@@ -118,11 +122,11 @@ public class DMCliente extends DMGeral {
         {   
         	Statement statement = getConnection().createStatement();
             String excluirSQL = "DELETE FROM cliente WHERE (cpf = '"+objCli.getCpf()+"')";
-            System.out.println("Enviando cï¿½digo SQL: " + getConnection().nativeSQL(excluirSQL) + "\n");
+            System.out.println("Enviando código SQL: " + getConnection().nativeSQL(excluirSQL) + "\n");
             int result = statement.executeUpdate(excluirSQL);
             if (result == 1)
             {   
-            	System.out.println("\nCliente excluido com sucesso");
+            	System.out.println("\nCliente excluído com sucesso");
             }
             else
             {   
@@ -133,35 +137,37 @@ public class DMCliente extends DMGeral {
         }
         catch (SQLException e)
         { 
-        	System.out.println("Problemas com o SQL de exclusï¿½o do cliente !"); 
+        	System.out.println("Problemas com o SQL de exclusão do cliente !"); 
         }
 	}
 
 	public void alterar(Object obj) {
-		Cliente objCli = (Cliente) obj;
-        try
-        {   
-        	Statement statement = getConnection().createStatement();
-            String alterarSQL = "UPDATE clientes SET cpf = '"+objCli.getCpf()+"' ,"+
-                                "nome = '"+objCli.getNome()+"' ,"+
-                                "telefone = '"+objCli.getTelefone()+"'"+
-                                "email = '"+objCli.getEmail()+"'"+
-                                "WHERE (cpf = '"+objCli.getCpf()+"')";
-            int result = statement.executeUpdate(alterarSQL);
-            if (result == 1)
-            { 
-            	System.out.println( "\nCliente alterado com sucesso!"); 
-            }
-            else
-            {   
-            	System.out.println( "\nErro ao alterar cliente !\n" );
-                objCli = null;
-            }
-        }
-        catch (SQLException e)
-        { 
-        	System.out.println("Problemas com o SQL de atualizaï¿½ï¿½o do cliente !"); 
-        }
+//		Cliente objCli = (Cliente) obj;
+//        try
+//        {   
+//        	System.out.println(objCli.getNome());
+//        	Statement statement = getConnection().createStatement();
+//            String alterarSQL = "UPDATE clientes SET cpf = '"+objCli.getCpf()+"' ,"+
+//                                "nome = '"+objCli.getNome()+"' ,"+
+//                                "telefone = '"+objCli.getTelefone()+"'"+
+//                                "email = '"+objCli.getEmail()+"'"+
+//                                "WHERE (cpf = '"+objCli.getCpf()+"')";
+//            System.out.println("Enviando cï¿½digo SQL: " + getConnection().nativeSQL(alterarSQL) + "\n");
+//            int result = statement.executeUpdate(alterarSQL);
+//            if (result == 1)
+//            { 
+//            	System.out.println( "\nCliente alterado com sucesso!"); 
+//            }
+//            else
+//            {   
+//            	System.out.println( "\nErro ao alterar cliente !\n" );
+//                objCli = null;
+//            }
+//        }
+//        catch (SQLException e)
+//        { 
+//        	System.out.println("Problemas com o SQL de atualizaï¿½ï¿½o do cliente !"); 
+//        }
 	}
 	
 	public void shutDown()
