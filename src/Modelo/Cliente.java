@@ -1,5 +1,6 @@
 package Modelo;
 
+import Apresentacao.*;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -72,7 +73,7 @@ public class Cliente
 		System.out.println("Conexão com a tabela Cliente feita com sucesso!");
 	}
 	
-	public void buscar(Cliente objCli) {
+	public Boolean buscar() {
 		Cliente cli = (Cliente) dmCli.consultar(this);
 		if (cli != null) {
 			String info = "Cliente "+cli.getIdCliente()+
@@ -81,9 +82,11 @@ public class Cliente
 					"\nTelefone: "+cli.getTelefone()+
 					"\nEmail: "+cli.getEmail();
 			JOptionPane.showMessageDialog(null,"Cliente encontrado!\n"+info,"Sucesso!",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("../Clinica_Veterinaria/src/Images/icone-clienteV.png"));
-		} else {
-			JOptionPane.showMessageDialog(null, "Cliente não encontrado!","Mensagem de erro", JOptionPane.ERROR_MESSAGE);			
+			return true;
 		}
+		
+		JOptionPane.showMessageDialog(null, "Cliente não encontrado!","Mensagem de erro", JOptionPane.ERROR_MESSAGE);
+		return false;
 	}
 	
 	public void incluir(Cliente objCli)

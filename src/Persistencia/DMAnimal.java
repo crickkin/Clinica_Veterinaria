@@ -11,19 +11,20 @@ public class DMAnimal extends DMGeral {
 		Animal objAni = (Animal) obj;
 		try {   
 			Statement statement = getConnection().createStatement(); 
+			System.out.println();
 			String incluirSQL = "INSERT INTO animal (nome, raca, especie, sexo, id_cliente)"
   					+ " VALUES ('" +
                       objAni.getNome() + "', '" +
                       objAni.getRaca() + "', '" +
                       objAni.getEspecie() + "', '" +
                       objAni.getSexo() + "', '" +
-                      "')";
+                      objAni.getProprietario().getIdCliente() + "')";
             System.out.println("Enviando codigo SQL: " + getConnection().nativeSQL(incluirSQL) + "\n");
             int result = statement.executeUpdate(incluirSQL);
             if (result == 1) {   
-            	JOptionPane.showMessageDialog(null,"Animal cadastrado com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
+            	JOptionPane.showMessageDialog(null,"Animal cadastrado com sucesso!","Sucesso", JOptionPane.INFORMATION_MESSAGE);
             } else {   
-            	JOptionPane.showMessageDialog(null,"Erro ao cadastrar Animal!","Erro",JOptionPane.ERROR_MESSAGE);
+            	JOptionPane.showMessageDialog(null,"Erro ao cadastrar Animal!","Erro", JOptionPane.ERROR_MESSAGE);
             	objAni.setNome("");
                 objAni.setRaca("");
                 objAni.setEspecie("");
@@ -40,20 +41,19 @@ public class DMAnimal extends DMGeral {
 		Animal objAni = (Animal) obj;
 		try {   
 			Statement statement = getConnection().createStatement();
-            String consultarSQL = "SELECT * FROM animal WHERE (nome = '"+objAni.getNome()+"' AND id_cliente = '"+/*ID_CLIENTE+*/"')";
+            String consultarSQL = "SELECT * FROM animal JOIN cliente ON animal.id_cliente = cliente.id_cliente WHERE (animal.nome = '"+objAni.getNome()+"' AND cliente.cpf = '"+objAni.getProprietario().getCpf()+"')";
             System.out.println("Enviando codigo SQL: " + getConnection().nativeSQL(consultarSQL));
             ResultSet result = statement.executeQuery(consultarSQL);
             if (result.next()) {
-            	String info = "Animal " + result.getString("id_animal") + 
-            				"\nNome: " + result.getString("nome") +
-            				"\nRaca: " + result.getString("raca") +
-            				"\nEspecie: " + result.getString("especie") +
-            				"\nSexo: " + result.getString("sexo");
-            	
-            	JOptionPane.showMessageDialog(null, info, "Animal encontrado", JOptionPane.INFORMATION_MESSAGE);
+            	System.out.println("\nAnimal encontrado");
+            	objAni.setIdAnimal(result.getInt("id_animal"));
+            	objAni.setNome(result.getString("nome"));
+            	objAni.setRaca(result.getString("raca"));
+            	objAni.setEspecie(result.getString("especie"));
+            	objAni.setSexo(result.getString("sexo").charAt(0));
                 result.close();
             } else {   
-            	JOptionPane.showMessageDialog(null, "Nï¿½o hï¿½ animais com esse nï¿½mero de CPF.", "Animal nï¿½o encontrado", JOptionPane.ERROR_MESSAGE);
+            	System.out.println("\nAnimal não encontrado");
                 objAni = null;
             }
             statement.close();

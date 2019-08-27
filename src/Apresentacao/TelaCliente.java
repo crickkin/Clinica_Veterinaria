@@ -5,8 +5,10 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-@SuppressWarnings("serial")
-public class TelaCliente extends JFrame {
+public class TelaCliente extends JFrame 
+{
+	private static final long serialVersionUID = 1L;
+	
 	private JLabel lNome, lCpf, lTelefone, lEmail, lCpfBusca;
 	private JTextField tNome, tCpf, tTelefone, tEmail, tCpfBusca;
 	private JButton bSalvar, bLimpar, bListar, bBuscar, bExcluir, bEditar, bFechar, bLimparCpf;
@@ -36,6 +38,7 @@ public class TelaCliente extends JFrame {
 					email = tEmail.getText();
 					objSalvar = new Cliente(nome,cpf,telefone, email);	
 					objSalvar.incluir(objSalvar);
+					dispose();
 				}
 				
 				if (e.getSource() == bLimpar) {
@@ -56,7 +59,7 @@ public class TelaCliente extends JFrame {
 				if (e.getSource() == bBuscar) {
 					cpfBusca = tCpfBusca.getText();
 					objCli = new Cliente(cpfBusca);
-					objCli.buscar(objCli);
+					objCli.buscar();
 				}
 				
 				if (e.getSource() == bExcluir) {

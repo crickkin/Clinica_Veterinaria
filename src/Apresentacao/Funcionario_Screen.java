@@ -1,37 +1,32 @@
 package Apresentacao;
 
 import Modelo.*;
-import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
-
-import Modelo.Cliente;
-
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
-public class Animal_Screen extends JFrame
+public class Funcionario_Screen extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 	
+	private JLabel lNome, lCpf, lCtps, lDtNascimento, lDtContratacao, lGenero, lCpfBusca;
+	private JTextField tNome, tCpf, tCtps, tDtNascimento, tDtContratacao, tGenero, tCpfBusca;
+	private JButton bSalvar, bLimpar, bListar, bBuscar, bExcluir, bEditar, bFechar, bLimparCpf;
 	private JPanel pCadastro, pBusca;
-	private JLabel lNome, lRaca, lEspecie, lSexo, lIdade, lProprietario, lCpfBusca, lNomePesquisa;
-	private JTextField tNome, tRaca, tEspecie, tSexo, tIdade, tProprietario, tCpfBusca, tNomePesquisa;
-	private JButton bSalvar, bListar, bBuscar, bLimpar, bExcluir, bLimparCpf, bFechar;
 	
-	String nome, raca, especie, proprietario, cpfBusca, nomePesquisa;
-	char sexo;
-	int idade;
-	Animal objAni, objSalvar;
+	String nome, cpf, ctps, rg, dtNacimento, dtContratacao, genero;
+	double salario;
+	int idFunc;
 	
-	public Animal_Screen()
+	public Funcionario_Screen()
 	{
 		this.setSize(630,440);
-		this.setTitle("Tela de Gerenciamento de Animal");
+		this.setTitle("Tela de Gerenciamento de Funcionário");
 		this.setResizable(false);
-		this.setLayout(null); 
+		this.setLayout(null);
 		
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		Image img = tk.getImage("../Clinica_Veterinaria/src/Images/pata_icone.png");
+		Image img = tk.getImage("../Clinica_Veterinaria/src/Images/veterinario_icone.png");
 		this.setIconImage(img);
 		
 		//criando classe interna para funcionar como ouvinte dos eventos de mouse
@@ -39,40 +34,26 @@ public class Animal_Screen extends JFrame
 			public void mouseClicked(MouseEvent e) {
 				if (e.getSource() == bSalvar) {					
 					nome = tNome.getText();
-					raca = tRaca.getText();
-					especie = tEspecie.getText();
-					sexo = tSexo.getText().charAt(0);
-					idade = Integer.parseInt(tIdade.getText());
-					proprietario = tProprietario.getText();
-					
-					objSalvar = new Animal(nome,raca,especie, sexo, idade, proprietario);
-					dispose();
+					cpf = tCpf.getText();
+					//objSalvar = new Cliente(nome,cpf,telefone, email);	
 					//objSalvar.incluir(objSalvar);
 				}
-				
 				if (e.getSource() == bLimpar) {
 					tNome.setText("");
-					tRaca.setText("");
-					tSexo.setText("");
-					tEspecie.setText("");
-					tProprietario.setText("");
-					tIdade.setText("");
+					tCpf.setText("");
 				}
-				
 				if (e.getSource() == bLimparCpf) {
-					tNomePesquisa.setText("");
-					tCpfBusca.setText("");
+					//tCpfBusca.setText("");
 				}
-				
 				if (e.getSource() == bBuscar) {
-					cpfBusca = tCpfBusca.getText();
-					objAni = new Animal(nomePesquisa, cpfBusca);
+					//cpfBusca = tCpfBusca.getText();
+					//objCli = new Cliente(cpfBusca);
+					//objCli.buscar(objCli);
 				}
-				
 				if (e.getSource() == bExcluir) {
-					/*cpfBusca = tCpfBusca.getText();
-					objCli = new Cliente(cpfBusca);
-					objCli.excluir(objCli);*/
+					//cpfBusca = tCpfBusca.getText();
+					//objCli = new Cliente(cpfBusca);
+					//objCli.excluir(objCli);
 				}
 				
 				if (e.getSource() == bFechar) {
@@ -81,15 +62,13 @@ public class Animal_Screen extends JFrame
 			}	
 		}
 		
-		
-		//adicionando ouvinte para os botï¿½es
 		Event action = new Event();
 		
 		//criando os panels para estruturar as ï¿½reas na tela 
 		pCadastro = new JPanel();
 		pCadastro.setSize(610,210);
 		pCadastro.setLocation(10,10);
-		pCadastro.setBorder(BorderFactory.createTitledBorder("Cadastro de animal:"));
+		pCadastro.setBorder(BorderFactory.createTitledBorder("Cadastro de cliente:"));
 		pCadastro.setLayout(null);
 		
 		pBusca = new JPanel();
@@ -100,71 +79,62 @@ public class Animal_Screen extends JFrame
 		
 		//adicionando os labels	e text fields
 		
-		lNome = new JLabel("Nome: ");
+		lNome = new JLabel("Nome Completo: ");
 		lNome.setSize(150,30);
 		lNome.setLocation(20,20);
 		
 		tNome = new JTextField();
 		tNome.setSize(400,20);
-		tNome.setLocation(190,25);
+		tNome.setLocation(120,25);
 		
-		lRaca = new JLabel("Raça: ");
-		lRaca.setSize(150,30);
-		lRaca.setLocation(20,50);
+		lCpf = new JLabel("CPF: ");
+		lCpf.setSize(150,30);
+		lCpf.setLocation(20,50);
 		
-		tRaca = new JTextField();
-		tRaca.setSize(120,20);
-		tRaca.setLocation(190,55);
+		tCpf = new JTextField();
+		tCpf.setSize(120,20);
+		tCpf.setLocation(70,55);
 		
-		lEspecie = new JLabel("Espécie: ");
-		lEspecie.setSize(150,30);
-		lEspecie.setLocation(20,80);
+		lCtps = new JLabel("CTPS: ");
+		lCtps.setSize(150,30);
+		lCtps.setLocation(20,80);
 		
-		tEspecie = new JTextField();
-		tEspecie.setSize(120,20);
-		tEspecie.setLocation(190,85);
+		tCtps = new JTextField();
+		tCtps.setSize(120,20);
+		tCtps.setLocation(70,85);
 		
-		lSexo = new JLabel("Sexo: ");
-		lSexo.setSize(150,30);
-		lSexo.setLocation(20,110);
+		lDtNascimento = new JLabel("Data de Nascimento: ");
+		lDtNascimento.setSize(150,30);
+		lDtNascimento.setLocation(20,110);
 		
-		tSexo = new JTextField();
-		tSexo.setSize(15,20);
-		tSexo.setLocation(190,115);
+		tDtNascimento = new JTextField();
+		tDtNascimento.setSize(120,20);
+		tDtNascimento.setLocation(150,115);
 		
-		lIdade = new JLabel("Idade: ");
-		lIdade.setSize(150,30);
-		lIdade.setLocation(20,140);
+		lDtContratacao = new JLabel("Data de Contratação: ");
+		lDtContratacao.setSize(150,30);
+		lDtContratacao.setLocation(20,140);
 		
-		tIdade = new JTextField();
-		tIdade.setSize(50,20);
-		tIdade.setLocation(190,145);
+		tDtContratacao = new JTextField();
+		tDtContratacao.setSize(120,20);
+		tDtContratacao.setLocation(150,145);
 		
-		lProprietario = new JLabel("Proprietário(CPF): ");
-		lProprietario.setSize(150,30);
-		lProprietario.setLocation(20,170);
+		lGenero = new JLabel("Gênero: ");
+		lGenero.setSize(50,30);
+		lGenero.setLocation(20,170);
 		
-		tProprietario = new JTextField();
-		tProprietario.setSize(150,20);
-		tProprietario.setLocation(190,175);
-		
-		lNomePesquisa = new JLabel("Nome do Animal: ");
-		lNomePesquisa.setSize(150,30);
-		lNomePesquisa.setLocation(20,20);
-		
-		tNomePesquisa = new JTextField();
-		tNomePesquisa.setSize(120,20);
-		tNomePesquisa.setLocation(130,25);
+		tGenero = new JTextField();
+		tGenero.setSize(15,20);
+		tGenero.setLocation(70,175);
 		
 		lCpfBusca = new JLabel("CPF: ");
 		lCpfBusca.setSize(50,30);
-		lCpfBusca.setLocation(20,50);
+		lCpfBusca.setLocation(20,20);
 		
 		tCpfBusca = new JTextField();
 		tCpfBusca.setSize(120,20);
-		tCpfBusca.setLocation(70,55);
-
-				
+		tCpfBusca.setLocation(50,25);
+		
 		//adicionando os buttons
 //		bEditar = new JButton("Editar");
 //		bEditar.setSize(85,30);
@@ -222,37 +192,32 @@ public class Animal_Screen extends JFrame
 		bFechar.setBackground(Color.gray);
 		bFechar.addMouseListener(action);
 		
-		//acrescentando os componentes ï¿½ tela
+		//acrescentando os componentes tela
 		this.add(pCadastro);
 		pCadastro.add(lNome);
 		pCadastro.add(tNome);
-
-		pCadastro.add(lRaca);
-		pCadastro.add(tRaca);
 		
-		pCadastro.add(lEspecie);
-		pCadastro.add(tEspecie);
+		pCadastro.add(lCpf);
+		pCadastro.add(tCpf);
 		
-		pCadastro.add(lSexo);
-		pCadastro.add(tSexo);
+		pCadastro.add(lCtps);
+		pCadastro.add(tCtps);
 		
-		pCadastro.add(lIdade);
-		pCadastro.add(tIdade);
+		pCadastro.add(lDtNascimento);
+		pCadastro.add(tDtNascimento);
 		
-		pCadastro.add(lProprietario);
-		pCadastro.add(tProprietario);
+		pCadastro.add(lDtContratacao);
+		pCadastro.add(tDtContratacao);
+		
+		pCadastro.add(lGenero);
+		pCadastro.add(tGenero);
 		
 		pCadastro.add(bSalvar);
 		pCadastro.add(bLimpar);
-//		pCadastro.add(bEditar);
 		
 		this.add(pBusca);
-		pBusca.add(lNomePesquisa);
-		pBusca.add(tNomePesquisa);
-		
 		pBusca.add(lCpfBusca);
 		pBusca.add(tCpfBusca);
-//		pBusca.add(bListar);
 		pBusca.add(bBuscar);
 		pBusca.add(bExcluir);
 		pBusca.add(bLimparCpf);

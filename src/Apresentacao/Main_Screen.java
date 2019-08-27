@@ -23,9 +23,10 @@ public class Main_Screen extends JFrame
 		this.setTitle("Clinica Veterinária");
 		this.setSize(1280, 720);
 		this.setLayout(new BorderLayout());
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		this.bdLogin = "root";
-		this.bdLogin = "petricor";
+		this.bdSenha = "petricor";
 		BdInitialize();
 		
 		/*Listener*/
@@ -46,6 +47,7 @@ public class Main_Screen extends JFrame
 				    		new TelaCliente();
 				    		break;
 				    	case 2:
+				    		new Funcionario_Screen();
 				    		break;
 				    	default:
 				    		break;
