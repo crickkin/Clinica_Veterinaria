@@ -89,6 +89,7 @@ public class Main_Screen extends JFrame
 		mainPanel.add(bAgendar);
 		
 		contentPane.add(mainPanel, BorderLayout.CENTER);
+		contentPane.add(new Status_Bar(), BorderLayout.SOUTH);
 		
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
@@ -110,5 +111,10 @@ public class Main_Screen extends JFrame
 	public void CadastrarAnimal()
 	{
 		new Animal_Screen();
+	}
+	
+	public void Sobre(){
+		JOptionPane.showMessageDialog(null, "Instituto Federal Fluminense campus Campos Centro\n"
+				+ "Desenvolvedores: Nícolas Souza & Danielly Dantos");
 	}
 }

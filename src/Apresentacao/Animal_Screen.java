@@ -31,7 +31,7 @@ public class Animal_Screen extends JFrame
 		this.setLayout(null); 
 		
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		Image img = tk.getImage("../Clinica_Veterinaria/src/Images/cliente_icone_preto.jpg");
+		Image img = tk.getImage("../Clinica_Veterinaria/src/Images/icone_pata_cruz.png");
 		this.setIconImage(img);
 		
 		//criando classe interna para funcionar como ouvinte dos eventos de mouse
@@ -50,13 +50,16 @@ public class Animal_Screen extends JFrame
 				}
 				
 				if (e.getSource() == bLimpar) {
-					/*tNome.setText("");
-					tCpf.setText("");
-					tTelefone.setText("");
-					tEmail.setText("");*/
+					tNome.setText("");
+					tRaca.setText("");
+					tSexo.setText("");
+					tEspecie.setText("");
+					tProprietario.setText("");
+					tIdade.setText("");
 				}
 				
 				if (e.getSource() == bLimparCpf) {
+					tNomePesquisa.setText("");
 					tCpfBusca.setText("");
 				}
 				
@@ -126,7 +129,7 @@ public class Animal_Screen extends JFrame
 		lSexo.setLocation(20,110);
 		
 		tSexo = new JTextField();
-		tSexo.setSize(20,20);
+		tSexo.setSize(15,20);
 		tSexo.setLocation(190,115);
 		
 		lIdade = new JLabel("Idade: ");

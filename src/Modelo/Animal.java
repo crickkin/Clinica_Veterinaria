@@ -62,6 +62,15 @@ public class Animal
 		this.proprietario = proprietario;
 	}
 	
+	public int getIdade() 
+	{
+		return idade;
+	}
+	public void setIdade(int idade) 
+	{
+		this.idade = idade;
+	}
+	
 	//Persistência
 	public void incluir(Animal objAni)
 	{

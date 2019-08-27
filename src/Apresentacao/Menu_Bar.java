@@ -76,8 +76,8 @@ public class Menu_Bar
         //Opção 1 - Login e Senha
         JMenuItem menu2Item1 = new JMenuItem("Login & Senha");
         menu2Item1.setFont(new Font("Arial", Font.PLAIN, 11));
-        menu2Item1.setMnemonic(KeyEvent.VK_A);
-        menu2Item1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
+        menu2Item1.setMnemonic(KeyEvent.VK_D);
+        menu2Item1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK));
         menu2Item1.addActionListener(
       		  new ActionListener()
       	      { 
@@ -100,8 +100,8 @@ public class Menu_Bar
         // Opção 1 - Sobre
         JMenuItem menu3Item1 = new JMenuItem("Sobre");
         menu3Item1.setFont(new Font("Arial", Font.PLAIN,11));
-        menu3Item1.setMnemonic(KeyEvent.VK_H);
-        menu3Item1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H,InputEvent.CTRL_MASK));
+        menu3Item1.setMnemonic(KeyEvent.VK_A);
+        menu3Item1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,InputEvent.CTRL_MASK));
         menu3Item1.addActionListener(
 		  new ActionListener()
 	      { 
