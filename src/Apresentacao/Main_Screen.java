@@ -68,7 +68,8 @@ public class Main_Screen extends JFrame
 		
 		contentPane.add(mainPanel, BorderLayout.CENTER);
 		
-		this.repaint();
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+		this.repaint();
 	}
 }

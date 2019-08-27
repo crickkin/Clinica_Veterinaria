@@ -14,12 +14,13 @@ public class Animal_Screen extends JFrame
 	private JLabel lNome, lRaca, lEspecie, lSexo, lIdade, lProprietario;
 	private JTextField tNome, tRaca, tEspecie, tSexo, tIdade, tProprietario;
 	private JComboBox cbSexo;
+	private JButton bCadastrar;
 	
 	private String nome, raca, especie, sexo, idade, proprietario;
 	
 	public Animal_Screen()
 	{
-		this.setSize(1280, 720);
+		this.setSize(768, 432);
 		this.setTitle("Cadastro de Animal");
 		this.setLayout(new BorderLayout());
 		this.setResizable(false);
@@ -32,6 +33,7 @@ public class Animal_Screen extends JFrame
 		pTitle.add(lTitle);
 		
 		pPrincipal = new JPanel();
+		pPrincipal.setLayout(new GridLayout(2, 1));
 		
 		pInfoPrimaria = new JPanel();
 		pInfoPrimaria.setLocation(10, 10);
@@ -68,13 +70,31 @@ public class Animal_Screen extends JFrame
 		pInfoPrimaria.add(lIdade);
 		pInfoPrimaria.add(tIdade);
 		
-		JButton bCadastrar = new JButton("Cadastrar");
+		/*Listener*/
+		class Sinal extends MouseAdapter {
+			public void mouseClicked(MouseEvent evento) {
+				if (evento.getSource() == bCadastrar)
+				{
+					JOptionPane.showMessageDialog(null, "Seu Animal!");
+				}
+			}
+		}
+		
+		Sinal listener = new Sinal();
+		
+		JPanel pButton = new JPanel();
+		bCadastrar = new JButton("Cadastrar");
+		bCadastrar.addMouseListener(listener);
+		
+		pButton.add(bCadastrar);
 		
 		pPrincipal.add(pInfoPrimaria);
+		pPrincipal.add(pButton);
 		
 		this.add(BorderLayout.NORTH, pTitle);
 		this.add(BorderLayout.CENTER, pPrincipal);
 		
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		this.repaint();
 	}
