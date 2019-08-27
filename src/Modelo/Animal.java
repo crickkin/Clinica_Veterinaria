@@ -4,16 +4,17 @@ public class Animal
 {
 	private String nome, raca, especie;
 	private char sexo;
+	private int idade;
 	private Cliente proprietario;
 	
 	//Construct
-	public Animal(){};
-	public Animal(String nome, String raca, String especie, boolean sexo)
+	public Animal(String nome, String raca, String especie, char sexo, int idade)
 	{
 		this.nome = nome;
 		this.raca = raca;
 		this.especie = especie;
-		this.sexo = (sexo) ? 'M' : 'F';
+		this.sexo = sexo;
+		this.idade = idade;
 	}
 	
 	//Setters 'n Getters
@@ -59,5 +60,16 @@ public class Animal
 	public void setProprietario(Cliente proprietario) 
 	{
 		this.proprietario = proprietario;
+	}
+	
+	//Persistência
+	public void incluir(Animal objAni)
+	{
+		//
+	}
+	
+	public void addProprietario(String cpfProprietario)
+	{
+		Cliente proprietario = new Cliente(cpfProprietario);
 	}
 }

@@ -61,14 +61,14 @@ public class Cliente
 		this.telefone = telefone;
 		this.email = email;
 		dmCli = new DMCliente();
-    	dmCli.conectaDataBase("db_clinicaVeterinaria","root","root");
+    	dmCli.conectaDataBase();
     	System.out.println("Conexão com a tabela Cliente feita com sucesso!");
 	}
 	
 	public Cliente(String cpf) {
 		this.cpf = cpf;
 		dmCli = new DMCliente();
-		dmCli.conectaDataBase("db_clinicaVeterinaria","root","root");
+		dmCli.conectaDataBase();
 		System.out.println("Conexão com a tabela Cliente feita com sucesso!");
 	}
 	

@@ -106,7 +106,7 @@ public class Funcionario
 		this.genero = genero;
 		this.salario = salario;
 		dmFun = new DMFuncionario();
-    	dmFun.conectaDataBase("db_clinicaVeterinaria","root","root");
+    	dmFun.conectaDataBase();
     	System.out.println("Conexão com a tabela Funcionario feita com sucesso!");
 	}
 	
@@ -114,7 +114,7 @@ public class Funcionario
 	{
 		this.cpf = cpf;
 		dmFun = new DMFuncionario();
-    	dmFun.conectaDataBase("db_clinicaVeterinaria","root","root");
+    	dmFun.conectaDataBase();
     	System.out.println("Conexão com a tabela Funcionario feita com sucesso!");
 	}	
 	

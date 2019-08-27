@@ -35,7 +35,7 @@ public class Menu_Bar
         menu1Item1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F,InputEvent.CTRL_MASK));
         menu1Item1.addActionListener(new ActionListener()
         { public void actionPerformed(ActionEvent e)
-            { chamaMetodo(e,"jPFisica"); }
+            { chamaMetodo(e,"CadastrarAnimal"); }
         });
 
         // Opções do Menu Cadastros Básicos
@@ -67,33 +67,58 @@ public class Menu_Bar
         menu1.add(menu1Item3); // Item Sair
 
 
-      // Cria o Menu Ajuda na Barra de Menu
-      JMenu menu2 = new JMenu("Ajuda");
-      menu2.setMnemonic(KeyEvent.VK_U);
-      menu2.setFont(new Font ("Arial",Font.PLAIN,11));
+        //Cria o Menu de Banco de dados
+        JMenu menu2 = new JMenu("Banco de Dados");
+        menu2.setMnemonic(KeyEvent.VK_D);
+        menu2.setFont(new Font ("Arial", Font.PLAIN, 11));
+        
+        //Opções do Menu Banco de Dados
+        //Opção 1 - Login e Senha
+        JMenuItem menu2Item1 = new JMenuItem("Login & Senha");
+        menu2Item1.setFont(new Font("Arial", Font.PLAIN, 11));
+        menu2Item1.setMnemonic(KeyEvent.VK_A);
+        menu2Item1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
+        menu2Item1.addActionListener(
+      		  new ActionListener()
+      	      { 
+      			  public void actionPerformed(ActionEvent e)
+      			  { 
+      				  chamaMetodo(e,"LoginDataBase"); 
+      			  }
+      	      }
+        );
+        
+        menu2.add(menu2Item1);
+        
+        // Cria o Menu Ajuda na Barra de Menu
 
-      // Opçoes do Menu Ajuda
-      // Opção 1 - Sobre
-      JMenuItem menu2Item1 = new JMenuItem("Sobre");
-      menu2Item1.setFont(new Font("Arial", Font.PLAIN,11));
-      menu2Item1.setMnemonic(KeyEvent.VK_A);
-      menu2Item1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,InputEvent.CTRL_MASK));
-      menu2Item1.addActionListener(
-    		  new ActionListener()
-		      { 
-    			  public void actionPerformed(ActionEvent e)
-    			  { 
-    				  chamaMetodo(e,"jSobre"); 
-				  }
-		      }
-	  );
+        JMenu menu3 = new JMenu("Ajuda");
+        menu3.setMnemonic(KeyEvent.VK_U);
+        menu3.setFont(new Font ("Arial",Font.PLAIN,11));
+
+        // Opçoes do Menu Ajuda
+        // Opção 1 - Sobre
+        JMenuItem menu3Item1 = new JMenuItem("Sobre");
+        menu3Item1.setFont(new Font("Arial", Font.PLAIN,11));
+        menu3Item1.setMnemonic(KeyEvent.VK_H);
+        menu3Item1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H,InputEvent.CTRL_MASK));
+        menu3Item1.addActionListener(
+		  new ActionListener()
+	      { 
+			  public void actionPerformed(ActionEvent e)
+			  { 
+				  chamaMetodo(e,"Sobre"); 
+			  }
+	      }
+    	);
      
       // Adiciona os itens criados ao Menu Ajuda
-      menu2.add(menu2Item1); // Item Sobre
+      menu3.add(menu3Item1); // Item Sobre
 
       // Adiciona os Menus à Barra de Menu
       BMenu.add(menu1); // Cadastros Básicos
-      BMenu.add(menu2); // Ajuda
+      BMenu.add(menu2);
+      BMenu.add(menu3); // Ajuda
 
       return BMenu;
     }

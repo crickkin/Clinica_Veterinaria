@@ -6,16 +6,24 @@ import java.sql.SQLException;
 
 public abstract class DMGeral {
 	protected static Connection connection;
+	
+	public static String dataBase, userName, password;
+	
+	public void ChangeDataBaseInfo(String dataBase, String userName, String password){
+		DMGeral.dataBase = dataBase;
+		DMGeral.userName = userName;
+		DMGeral.password = password;
+	}
 
 	public static Connection getConnection() {	
 		return connection;	
 	}
 
-	public void conectaDataBase(String dataBase, String userName, String password) {	
-		String url = "jdbc:mysql://localhost/"+dataBase+"?serverTimezone=UTC";
+	public void conectaDataBase() {	
+		String url = "jdbc:mysql://localhost/"+DMGeral.dataBase+"?serverTimezone=UTC";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-		   	connection = DriverManager.getConnection(url,userName,password);
+		   	connection = DriverManager.getConnection(url,DMGeral.userName,DMGeral.password);
 			System.out.println("Conexao ao banco de dados feita com sucesso!");
 		} 
 		catch (ClassNotFoundException cnfex) {	

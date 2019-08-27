@@ -1,6 +1,6 @@
 package Apresentacao;
 
-import Modelo.*;
+import Persistencia.DMFuncionario;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -14,6 +14,8 @@ public class Main_Screen extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 	private JButton bCadastrar, bAgendar, bConsultar;
+	
+	private String bdLogin, bdSenha;
 
 	public Main_Screen() 
 	{
@@ -22,12 +24,32 @@ public class Main_Screen extends JFrame
 		this.setSize(1280, 720);
 		this.setLayout(new BorderLayout());
 		
+		this.bdLogin = "root";
+		this.bdLogin = "petricor";
+		BdInitialize();
+		
 		/*Listener*/
 		class Sinal extends MouseAdapter {
 			public void mouseClicked(MouseEvent evento) {
 				if (evento.getSource() == bCadastrar)
 				{
-					new Animal_Screen();
+					String[] options = new String[] {"Animal", "Cliente", "Funcionário", "Cancelar"};
+				    int response = JOptionPane.showOptionDialog(null, "Selecione 1 tipo de cadastro", "Novo Cadastro",
+				        JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+				        null, options, options[0]);
+				    switch (response)
+				    {
+				    	case 0:
+				    		new Animal_Screen();	
+				    		break;
+				    	case 1:
+				    		new TelaCliente();
+				    		break;
+				    	case 2:
+				    		break;
+				    	default:
+				    		break;
+				    }
 				}
 				
 				if (evento.getSource() == bConsultar)
@@ -71,5 +93,22 @@ public class Main_Screen extends JFrame
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		this.repaint();
+	}
+	
+	//Login e Senha Banco de Dados
+	public void BdInitialize(){
+		new DMFuncionario().ChangeDataBaseInfo("db_clinicaVeterinaria", this.bdLogin, this.bdSenha);
+	}
+	
+	public void LoginDataBase(){
+		this.bdLogin = JOptionPane.showInputDialog("Login do Banco de Dados");
+		this.bdSenha = JOptionPane.showInputDialog("Senha do Banco de Dados");
+		BdInitialize();
+	}
+	
+	/*Definição de Métodos chamados no Menu Bar*/
+	public void CadastrarAnimal()
+	{
+		new Animal_Screen();
 	}
 }

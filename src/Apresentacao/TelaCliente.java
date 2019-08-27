@@ -17,14 +17,10 @@ public class TelaCliente extends JFrame {
 	
 	public TelaCliente()
 	{
-		
 		this.setSize(630,440);
 		this.setTitle("Tela de Gerenciamento de Cliente");
 		this.setResizable(false);
 		this.setLayout(null);
-		this.setVisible(true);
-		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE); 
 		
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image img = tk.getImage("../Clinica_Veterinaria/src/Images/cliente_icone_preto.jpg");
@@ -225,6 +221,8 @@ public class TelaCliente extends JFrame {
 		
 		this.add(bFechar);
 		
-		this.repaint();					
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+		this.repaint();			
 	}
 }
