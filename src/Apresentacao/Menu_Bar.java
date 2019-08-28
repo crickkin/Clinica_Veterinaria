@@ -29,42 +29,63 @@ public class Menu_Bar
 
         // Opções do Menu Gerenciamentos Básicos
         // Opção 1 - Pessoa Física
-        JMenuItem menu1Item1 = new JMenuItem("Cadastrar");
+        JMenuItem menu1Item1 = new JMenuItem("Cadastrar Animal");
         menu1Item1.setFont(new Font ("Arial",Font.PLAIN,11));
-        menu1Item1.setMnemonic(KeyEvent.VK_F);
-        menu1Item1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F,InputEvent.CTRL_MASK));
+        menu1Item1.setMnemonic(KeyEvent.VK_A);
+        menu1Item1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,InputEvent.CTRL_MASK));
         menu1Item1.addActionListener(new ActionListener()
         { public void actionPerformed(ActionEvent e)
             { chamaMetodo(e,"CadastrarAnimal"); }
         });
 
         // Opções do Menu Cadastros Básicos
-        // Opção 2 - Pessoa Jurídica
-        JMenuItem menu1Item2 = new JMenuItem("Consultar");
+        // Opção 2 - Consultar
+        JMenuItem menu1Item2 = new JMenuItem("Cadastrar Cliente");
         menu1Item2.setFont(new Font ("Arial",Font.PLAIN,11));
-        menu1Item2.setMnemonic(KeyEvent.VK_J);
-        menu1Item2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_J,InputEvent.CTRL_MASK));
+        menu1Item2.setMnemonic(KeyEvent.VK_C);
+        menu1Item2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,InputEvent.CTRL_MASK));
         menu1Item2.addActionListener(new ActionListener()
         { public void actionPerformed(ActionEvent e)
-            { chamaMetodo(e,"jPJuridica"); }
+            { chamaMetodo(e,"CadastrarCliente"); }
+        });
+        
+        JMenuItem menu1Item3 = new JMenuItem("Cadastrar Funcionário");
+        menu1Item3.setFont(new Font ("Arial",Font.PLAIN,11));
+        menu1Item3.setMnemonic(KeyEvent.VK_F);
+        menu1Item3.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F,InputEvent.CTRL_MASK));
+        menu1Item3.addActionListener(new ActionListener()
+        { public void actionPerformed(ActionEvent e)
+            { chamaMetodo(e,"CadastrarFuncionario"); }
+        });
+        
+        JMenuItem menu1Item4 = new JMenuItem("Consultar");
+        menu1Item4.setFont(new Font ("Arial",Font.PLAIN,11));
+        menu1Item4.setMnemonic(KeyEvent.VK_J);
+        menu1Item4.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_J,InputEvent.CTRL_MASK));
+        menu1Item4.addActionListener(new ActionListener()
+        { public void actionPerformed(ActionEvent e)
+            { chamaMetodo(e,"Consultar"); }
         });
  
         // Opções do Menu Cadastros Básicos
-        // Opção 3 - Sair
-        JMenuItem menu1Item3 = new JMenuItem("Sair");
-        menu1Item3.setFont(new Font ("Arial",Font.PLAIN,11));
-        menu1Item3.setMnemonic(KeyEvent.VK_F4);
-        menu1Item3.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4,InputEvent.ALT_MASK));
-        menu1Item3.addActionListener(new ActionListener()
+        // Opção 5 - Sair
+        JMenuItem menu1Item5 = new JMenuItem("Sair");
+        menu1Item5.setFont(new Font ("Arial",Font.PLAIN,11));
+        menu1Item5.setMnemonic(KeyEvent.VK_F4);
+        menu1Item5.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4,InputEvent.ALT_MASK));
+        menu1Item5.addActionListener(new ActionListener()
         { public void actionPerformed(ActionEvent e)
-            { chamaMetodo(e,"jSair"); }
+            { chamaMetodo(e,"Sair"); }
         });
 
         // Adiciona os itens criados ao Menu Cadastros Básicos
-        menu1.add(menu1Item1);  // Item Pessoa Física
-        menu1.add(menu1Item2);  // Item Pessoa Jurídica
-        menu1.addSeparator();   // Separador
-        menu1.add(menu1Item3); // Item Sair
+        menu1.add(menu1Item1);
+        menu1.add(menu1Item2);
+        menu1.add(menu1Item3);
+        menu1.addSeparator();
+        menu1.add(menu1Item4);
+        menu1.addSeparator();
+        menu1.add(menu1Item5);
 
 
         //Cria o Menu de Banco de dados
@@ -100,8 +121,8 @@ public class Menu_Bar
         // Opção 1 - Sobre
         JMenuItem menu3Item1 = new JMenuItem("Sobre");
         menu3Item1.setFont(new Font("Arial", Font.PLAIN,11));
-        menu3Item1.setMnemonic(KeyEvent.VK_A);
-        menu3Item1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,InputEvent.CTRL_MASK));
+        menu3Item1.setMnemonic(KeyEvent.VK_H);
+        menu3Item1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H,InputEvent.CTRL_MASK));
         menu3Item1.addActionListener(
 		  new ActionListener()
 	      { 

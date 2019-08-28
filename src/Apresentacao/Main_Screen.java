@@ -115,6 +115,16 @@ public class Main_Screen extends JFrame
 		new Animal_Screen();
 	}
 	
+	public void CadastrarCliente()
+	{
+		new TelaCliente();
+	}
+	
+	public void CadastrarFuncionario()
+	{
+		new Funcionario_Screen();
+	}
+	
 	public void Sobre(){
 		JOptionPane.showMessageDialog(null, "Instituto Federal Fluminense campus Campos Centro\n"
 				+ "Desenvolvedores: Nícolas Souza & Danielly Dantos");

@@ -9,14 +9,16 @@ public class Funcionario_Screen extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 	
-	private JLabel lNome, lCpf, lCtps, lDtNascimento, lDtContratacao, lGenero, lCpfBusca;
-	private JTextField tNome, tCpf, tCtps, tDtNascimento, tDtContratacao, tGenero, tCpfBusca;
+	private JLabel lNome, lCpf, lCtps, lDtNascimento, lDtContratacao, lRg, lGenero, lSalario, lCpfBusca;
+	private JTextField tNome, tCpf, tCtps, tDtNascimento, tDtContratacao, tRg, tGenero, tSalario, tCpfBusca;
 	private JButton bSalvar, bLimpar, bListar, bBuscar, bExcluir, bEditar, bFechar, bLimparCpf;
 	private JPanel pCadastro, pBusca;
 	
-	String nome, cpf, ctps, rg, dtNacimento, dtContratacao, genero;
+	String nome, cpf, ctps, rg, dtNascimento, dtContratacao, genero;
 	double salario;
 	int idFunc;
+	
+	Funcionario objSalvar;
 	
 	public Funcionario_Screen()
 	{
@@ -35,8 +37,15 @@ public class Funcionario_Screen extends JFrame
 				if (e.getSource() == bSalvar) {					
 					nome = tNome.getText();
 					cpf = tCpf.getText();
-					//objSalvar = new Cliente(nome,cpf,telefone, email);	
-					//objSalvar.incluir(objSalvar);
+					ctps = tCtps.getText();
+					rg = tRg.getText();
+					dtNascimento = tDtNascimento.getText();
+					dtContratacao = tDtContratacao.getText();
+					genero = tGenero.getText();
+					salario = Double.parseDouble(tSalario.getText());
+					objSalvar = new Funcionario(nome,cpf,ctps, rg, dtNascimento, dtContratacao, genero, salario);	
+					objSalvar.incluir(objSalvar);
+					dispose();
 				}
 				if (e.getSource() == bLimpar) {
 					tNome.setText("");
@@ -95,6 +104,14 @@ public class Funcionario_Screen extends JFrame
 		tCpf.setSize(120,20);
 		tCpf.setLocation(70,55);
 		
+		lRg = new JLabel("RG: ");
+		lRg.setSize(150,30);
+		lRg.setLocation(210,50);
+		
+		tRg = new JTextField();
+		tRg.setSize(120,20);
+		tRg.setLocation(250,55);
+		
 		lCtps = new JLabel("CTPS: ");
 		lCtps.setSize(150,30);
 		lCtps.setLocation(20,80);
@@ -102,6 +119,14 @@ public class Funcionario_Screen extends JFrame
 		tCtps = new JTextField();
 		tCtps.setSize(120,20);
 		tCtps.setLocation(70,85);
+		
+		lSalario = new JLabel("Salário: ");
+		lSalario.setSize(150,30);
+		lSalario.setLocation(210,80);
+		
+		tSalario = new JTextField();
+		tSalario.setSize(170,20);
+		tSalario.setLocation(270,85);
 		
 		lDtNascimento = new JLabel("Data de Nascimento: ");
 		lDtNascimento.setSize(150,30);
@@ -200,8 +225,14 @@ public class Funcionario_Screen extends JFrame
 		pCadastro.add(lCpf);
 		pCadastro.add(tCpf);
 		
+		pCadastro.add(lRg);
+		pCadastro.add(tRg);
+		
 		pCadastro.add(lCtps);
 		pCadastro.add(tCtps);
+		
+		pCadastro.add(lSalario);
+		pCadastro.add(tSalario);
 		
 		pCadastro.add(lDtNascimento);
 		pCadastro.add(tDtNascimento);

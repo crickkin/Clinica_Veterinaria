@@ -150,8 +150,7 @@ public class Funcionario
             }
             else
             { 
-            	dmFun.incluir(this); 
-            	JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            	dmFun.incluir(this);
             }
         }
     }
