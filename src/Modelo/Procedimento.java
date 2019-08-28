@@ -4,13 +4,15 @@ public abstract class Procedimento
 {
 	protected String data, hora;
 	protected Animal animal;
-	protected String veterinario;
+	protected Funcionario veterinario;
 	
 	//Constructor
-	public Procedimento(String data, String hora)
+	public Procedimento(String data, String hora, String cpfVeterinario, String nomeAnimal, String cpfCliente)
 	{
 		this.data = data;
 		this.hora = hora;
+		this.animal = new Animal(nomeAnimal, cpfCliente).find();
+		this.veterinario = new Funcionario(cpfVeterinario).find();
 	}
 	
 	//Setters 'n Getters
@@ -41,11 +43,11 @@ public abstract class Procedimento
 		this.animal = animal;
 	}
 	
-	public String getVeterinario() 
+	public Funcionario getVeterinario() 
 	{
 		return veterinario;
 	}
-	public void setVeterinario(String veterinario) 
+	public void setVeterinario(Funcionario veterinario) 
 	{
 		this.veterinario = veterinario;
 	}

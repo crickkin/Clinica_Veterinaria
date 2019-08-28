@@ -155,6 +155,27 @@ public class Animal
 		return false;
 	}
 	
+	public Animal find()
+	{
+		if (this.proprietario.buscar(false))
+		{
+			Connect();
+			Animal ani = (Animal) dmAni.consultar(this);
+			if (ani != null) 
+			{
+				String info = "Animal "+ani.getIdAnimal()+
+						"\nNome: "+ani.getNome()+
+						"\nEspécie: "+ani.getEspecie()+
+						"\nRaça: "+ani.getRaca()+
+						"\nSexo: "+ani.getSexo()+
+						"\nIdade: "+ani.getIdade();
+				return ani;
+			}
+			return null;
+		}
+		return null;
+	}
+	
 	public void excluir()
 	{
 		if (this.proprietario.buscar(false))

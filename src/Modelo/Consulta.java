@@ -1,13 +1,17 @@
 package Modelo;
 
+import Persistencia.DMConsulta;
+
 public class Consulta extends Procedimento
 {
 	private String sintomas, diagnostico;
+	
+	private DMConsulta dmCon;
 
 	//Constrcutor
-	public Consulta(String data, String hora, String sintomas, String diagnostico)
+	public Consulta(String data, String hora, String nomeVeterinario, String nomeAnimal, String cpfCliente, String sintomas, String diagnostico)
 	{
-		super(data, hora);
+		super(data, hora, nomeVeterinario, nomeAnimal, cpfCliente);
 		this.sintomas = sintomas;
 		this.diagnostico = diagnostico;
 	}
@@ -29,5 +33,16 @@ public class Consulta extends Procedimento
 	public void setDiagnostico(String diagnostico) 
 	{
 		this.diagnostico = diagnostico;
+	}
+	
+	//Methods
+	public void incluir(Consulta objCon)
+	{
+		if (this.animal != null && this.veterinario != null)
+		{
+			dmCon = new DMConsulta();
+			dmCon.conectaDataBase();
+			System.out.println("Conexão com a tabela Consulta estabelecida com sucesso");
+		}
 	}
 }

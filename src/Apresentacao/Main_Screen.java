@@ -4,6 +4,8 @@ import Persistencia.DMFuncionario;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -24,6 +26,10 @@ public class Main_Screen extends JFrame
 		this.setSize(1280, 720);
 		this.setLayout(new BorderLayout());
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img = tk.getImage("../Clinica_Veterinaria/src/Images/clinica_icone.png");
+		this.setIconImage(img);
 		
 		this.bdLogin = "root";
 		this.bdSenha = "petricor";
@@ -61,7 +67,15 @@ public class Main_Screen extends JFrame
 				
 				if (evento.getSource() == bAgendar)
 				{
-					System.out.println("Agendar");
+					String[] options = new String[] {"Consulta", "Cirurgia", "Cancelar"};
+				    int response = JOptionPane.showOptionDialog(null, "Selecione 1 tipo de procedimento", "Novo Cadastro",
+				        JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+				        null, options, options[0]);
+				    
+				    if (response == 0)
+				    {
+				    	new Consulta_Screen();
+				    }
 				}
 			}
 		}
@@ -83,11 +97,11 @@ public class Main_Screen extends JFrame
 		bConsultar = new JButton("Consultar Histórico");
 		bConsultar.addMouseListener(listener);
 		
-		bAgendar = new JButton("Agendar");
+		bAgendar = new JButton("Agendar Procedimento");
 		bAgendar.addMouseListener(listener);
 
 		mainPanel.add(bCadastrar);
-		mainPanel.add(bConsultar);
+		//mainPanel.add(bConsultar);
 		mainPanel.add(bAgendar);
 		
 		contentPane.add(mainPanel, BorderLayout.CENTER);
@@ -125,8 +139,20 @@ public class Main_Screen extends JFrame
 		new Funcionario_Screen();
 	}
 	
+	public void Sair()
+	{
+		dispose();
+	}
+	
+	public void AgendarConsulta()
+	{
+		new Consulta_Screen();
+	}
+	
 	public void Sobre(){
 		JOptionPane.showMessageDialog(null, "Instituto Federal Fluminense campus Campos Centro\n"
-				+ "Desenvolvedores: Nícolas Souza & Danielly Dantos");
+				+ "Desenvolvedores: Nícolas Souza & Danielly Dantos\n"
+				+ "Trabalho de Programação Orientada o Objeto\n"
+				+ "Bacharelado em Sistemas de Informação - 4º Período");
 	}
 }

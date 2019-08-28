@@ -50,9 +50,15 @@ public class Funcionario_Screen extends JFrame
 				if (e.getSource() == bLimpar) {
 					tNome.setText("");
 					tCpf.setText("");
+					tCtps.setText("");
+					tDtNascimento.setText("");
+					tDtContratacao.setText("");
+					tRg.setText("");
+					tGenero.setText("");
+					tSalario.setText("");
 				}
 				if (e.getSource() == bLimparCpf) {
-					//tCpfBusca.setText("");
+					tCpfBusca.setText("");
 				}
 				if (e.getSource() == bBuscar) {
 					cpfBusca = tCpfBusca.getText();
@@ -77,7 +83,7 @@ public class Funcionario_Screen extends JFrame
 		pCadastro = new JPanel();
 		pCadastro.setSize(610,210);
 		pCadastro.setLocation(10,10);
-		pCadastro.setBorder(BorderFactory.createTitledBorder("Cadastro de cliente:"));
+		pCadastro.setBorder(BorderFactory.createTitledBorder("Cadastro de funcionário:"));
 		pCadastro.setLayout(null);
 		
 		pBusca = new JPanel();

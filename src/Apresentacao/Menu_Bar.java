@@ -58,13 +58,13 @@ public class Menu_Bar
             { chamaMetodo(e,"CadastrarFuncionario"); }
         });
         
-        JMenuItem menu1Item4 = new JMenuItem("Consultar");
+        JMenuItem menu1Item4 = new JMenuItem("Agendar Consulta");
         menu1Item4.setFont(new Font ("Arial",Font.PLAIN,11));
         menu1Item4.setMnemonic(KeyEvent.VK_J);
         menu1Item4.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_J,InputEvent.CTRL_MASK));
         menu1Item4.addActionListener(new ActionListener()
         { public void actionPerformed(ActionEvent e)
-            { chamaMetodo(e,"Consultar"); }
+            { chamaMetodo(e,"AgendarConsulta"); }
         });
  
         // Opções do Menu Cadastros Básicos

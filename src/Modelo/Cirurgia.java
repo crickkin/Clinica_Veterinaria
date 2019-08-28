@@ -8,7 +8,7 @@ public class Cirurgia extends Procedimento
 	//Constructor
 	public Cirurgia(String data, String hora, String urgencia, String situacao, String duracao)
 	{
-		super(data, hora);
+		super(data, hora, "", "", "");
 		this.urgencia = urgencia;
 		this.situacao = situacao;
 		this.duracao = Integer.parseInt(duracao);
