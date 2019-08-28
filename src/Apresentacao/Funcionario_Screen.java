@@ -14,11 +14,11 @@ public class Funcionario_Screen extends JFrame
 	private JButton bSalvar, bLimpar, bListar, bBuscar, bExcluir, bEditar, bFechar, bLimparCpf;
 	private JPanel pCadastro, pBusca;
 	
-	String nome, cpf, ctps, rg, dtNascimento, dtContratacao, genero;
+	String nome, cpf, ctps, rg, dtNascimento, dtContratacao, genero, cpfBusca;
 	double salario;
 	int idFunc;
 	
-	Funcionario objSalvar;
+	Funcionario objSalvar, objFun;
 	
 	public Funcionario_Screen()
 	{
@@ -55,14 +55,14 @@ public class Funcionario_Screen extends JFrame
 					//tCpfBusca.setText("");
 				}
 				if (e.getSource() == bBuscar) {
-					//cpfBusca = tCpfBusca.getText();
-					//objCli = new Cliente(cpfBusca);
-					//objCli.buscar(objCli);
+					cpfBusca = tCpfBusca.getText();
+					objFun = new Funcionario(cpfBusca);
+					objFun.buscar(objFun);
 				}
 				if (e.getSource() == bExcluir) {
-					//cpfBusca = tCpfBusca.getText();
-					//objCli = new Cliente(cpfBusca);
-					//objCli.excluir(objCli);
+					cpfBusca = tCpfBusca.getText();
+					objFun = new Funcionario(cpfBusca);
+					objFun.excluir(objFun);
 				}
 				
 				if (e.getSource() == bFechar) {

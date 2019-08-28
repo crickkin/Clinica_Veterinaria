@@ -77,7 +77,7 @@ public class Main_Screen extends JFrame
 		JPanel mainPanel = new JPanel();
 		mainPanel.setSize(200, 200);
 		
-		bCadastrar = new JButton("Cadastrar");
+		bCadastrar = new JButton("Gerencia de Cadastro");
 		bCadastrar.addMouseListener(listener);
 		
 		bConsultar = new JButton("Consultar Histórico");

@@ -39,6 +39,7 @@ public class DMAnimal extends DMGeral {
 
 	public Object consultar(Object obj) {
 		Animal objAni = (Animal) obj;
+		System.out.println(objAni.getNome());
 		try {   
 			Statement statement = getConnection().createStatement();
             String consultarSQL = "SELECT * FROM animal JOIN cliente ON animal.id_cliente = cliente.id_cliente WHERE (animal.nome = '"+objAni.getNome()+"' AND cliente.cpf = '"+objAni.getProprietario().getCpf()+"')";
@@ -64,8 +65,30 @@ public class DMAnimal extends DMGeral {
 		return objAni;
 	}
 
-	public void excluir(Object obj) {
-		
+	public void excluir(Object obj)
+	{
+		Animal objAni = (Animal) obj;
+        try
+        {   
+        	Statement statement = getConnection().createStatement();
+            String excluirSQL = "DELETE FROM animal WHERE (animal.nome = '"+objAni.getNome()+"' AND id_animal = '"+objAni.getIdAnimal()+"')";
+            System.out.println("Enviando código SQL: " + getConnection().nativeSQL(excluirSQL) + "\n");
+            int result = statement.executeUpdate(excluirSQL);
+            if (result == 1)
+            {   
+            	System.out.println("\nAnimal excluído com sucesso");
+            }
+            else
+            {   
+            	System.out.println("\nErro ao excluir animal");
+                objAni = null;
+            }
+           statement.close();
+        }
+        catch (SQLException e)
+        { 
+        	System.out.println("Problemas com o SQL de exclusão do cliente !"); 
+        }
 	}
 
 	public void alterar(Object obj) {

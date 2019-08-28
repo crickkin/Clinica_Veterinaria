@@ -73,7 +73,7 @@ public class Cliente
 		System.out.println("Conexão com a tabela Cliente feita com sucesso!");
 	}
 	
-	public Boolean buscar() {
+	public Boolean buscar(Boolean showMessage) {
 		Cliente cli = (Cliente) dmCli.consultar(this);
 		if (cli != null) {
 			String info = "Cliente "+cli.getIdCliente()+
@@ -81,11 +81,12 @@ public class Cliente
 					"\nCPF: "+cli.getCpf()+
 					"\nTelefone: "+cli.getTelefone()+
 					"\nEmail: "+cli.getEmail();
-			JOptionPane.showMessageDialog(null,"Cliente encontrado!\n"+info,"Sucesso!",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("../Clinica_Veterinaria/src/Images/icone-clienteV.png"));
+			if (showMessage)
+				JOptionPane.showMessageDialog(null,"Cliente encontrado!\n"+info,"Sucesso!",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("../Clinica_Veterinaria/src/Images/icone-clienteV.png"));
 			return true;
 		}
-		
-		JOptionPane.showMessageDialog(null, "Cliente não encontrado!","Mensagem de erro", JOptionPane.ERROR_MESSAGE);
+		if (showMessage)
+			JOptionPane.showMessageDialog(null, "Cliente não encontrado!","Mensagem de erro", JOptionPane.ERROR_MESSAGE);
 		return false;
 	}
 	
@@ -120,7 +121,7 @@ public class Cliente
         	if (dmCli.consultar(this)!= null)
             { 
         		int idAnimal = dmCli.temAnimal(this); 
-        		if (idAnimal != 0) 
+        		if (idAnimal != 0)
         		{
         			JOptionPane.showMessageDialog(null,"Este Cliente não pode ser excluído, por ser proprietário de um animal cadastrado. "
         					+ "\nSe deseja excluir este cliente, deverá excluir o animal de id: " + idAnimal,"Mensagem de Erro",JOptionPane.ERROR_MESSAGE);

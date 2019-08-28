@@ -59,7 +59,7 @@ public class TelaCliente extends JFrame
 				if (e.getSource() == bBuscar) {
 					cpfBusca = tCpfBusca.getText();
 					objCli = new Cliente(cpfBusca);
-					objCli.buscar();
+					objCli.buscar(true);
 				}
 				
 				if (e.getSource() == bExcluir) {

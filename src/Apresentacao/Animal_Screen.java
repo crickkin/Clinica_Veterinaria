@@ -46,8 +46,7 @@ public class Animal_Screen extends JFrame
 					proprietario = tProprietario.getText();
 					
 					objSalvar = new Animal(nome,raca,especie, sexo, idade, proprietario);
-					dispose();
-					//objSalvar.incluir(objSalvar);
+					objSalvar.incluir(objSalvar);
 				}
 				
 				if (e.getSource() == bLimpar) {
@@ -65,14 +64,17 @@ public class Animal_Screen extends JFrame
 				}
 				
 				if (e.getSource() == bBuscar) {
+					nomePesquisa = tNomePesquisa.getText();
 					cpfBusca = tCpfBusca.getText();
 					objAni = new Animal(nomePesquisa, cpfBusca);
+					objAni.buscar();
 				}
 				
 				if (e.getSource() == bExcluir) {
-					/*cpfBusca = tCpfBusca.getText();
-					objCli = new Cliente(cpfBusca);
-					objCli.excluir(objCli);*/
+					nomePesquisa = tNomePesquisa.getText();
+					cpfBusca = tCpfBusca.getText();
+					objAni = new Animal(nomePesquisa, cpfBusca);
+					objAni.excluir();
 				}
 				
 				if (e.getSource() == bFechar) {

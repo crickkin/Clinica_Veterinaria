@@ -25,26 +25,13 @@ public class Animal
 		this.sexo = sexo;
 		this.idade = idade;
 		this.proprietario = new Cliente(cpfProprietario);
-		if (this.proprietario.buscar())
-		{
-			dmAni = new DMAnimal();
-			dmAni.conectaDataBase();
-			System.out.println("Conexão com a tabela Animal feita com sucesso!");
-			incluir(this);
-		}
 	}
 	
 	public Animal(String nome, String cpfProprietario)
 	{
 		this.nome = nome;
 		this.proprietario = new Cliente(cpfProprietario);
-		if (this.proprietario.buscar())
-		{
-			dmAni = new DMAnimal();
-			dmAni.conectaDataBase();
-			System.out.println("Conexão com a tabela Animal feita com sucesso!");
-			buscar();
-		}
+		
 	}
 	
 	//Setters 'n Getters
@@ -111,39 +98,79 @@ public class Animal
 	}
 	
 	//Persistência
+	void Connect()
+	{
+		dmAni = new DMAnimal();
+		dmAni.conectaDataBase();
+		System.out.println("Conexão com a tabela Animal feita com sucesso!");
+	}
 	public void incluir(Animal objAni)
 	{
-		if (objAni.getNome().equals(""))
-        {   
-			JOptionPane.showMessageDialog(null,"Nome do Animal é obrigatório!","Mensagem de alerta",JOptionPane.WARNING_MESSAGE);
-        }
-        else
-        {   
-        	if (dmAni.consultar(this)!= null)
-            {   
-        		JOptionPane.showMessageDialog(null,"Cadastro de Animal não realizado! \nEste Animal já foi registrado!","Mensagem de Erro",JOptionPane.ERROR_MESSAGE);
-            }
-            else
-            { 
-            	dmAni.incluir(this);
-            }
-        }
+		if (this.proprietario.buscar(false))
+		{
+			Connect();
+			if (objAni.getNome().equals(""))
+	        {   
+				JOptionPane.showMessageDialog(null,"Nome do Animal é obrigatório!","Mensagem de alerta",JOptionPane.WARNING_MESSAGE);
+	        }
+	        else
+	        {   
+	        	if (dmAni.consultar(this)!= null)
+	            {   
+	        		JOptionPane.showMessageDialog(null,"Cadastro de Animal não realizado! \nEste Animal já foi registrado!","Mensagem de Erro",JOptionPane.ERROR_MESSAGE);
+	            }
+	            else
+	            { 
+	            	dmAni.incluir(this);
+	            }
+	        }
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Não há nenhum Cliente com esse CPF.\nPor favor, insira o Cliente antes de Continuar");
+		}
 	}
 	
 	public Boolean buscar() {
-		Animal ani = (Animal) dmAni.consultar(this);
-		if (ani != null) {
-			String info = "Animal "+ani.getIdAnimal()+
-					"\nNome: "+ani.getNome()+
-					"\nEspécie: "+ani.getEspecie()+
-					"\nRaça: "+ani.getRaca()+
-					"\nSexo: "+ani.getSexo()+
-					"\nIdade: "+ani.getIdade();
-			JOptionPane.showMessageDialog(null,"Animal encontrado!\n"+info,"Sucesso!",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("../Clinica_Veterinaria/src/Images/pata_icone.png"));
-			return true;
+		if (this.proprietario.buscar(false))
+		{
+			Connect();
+			Animal ani = (Animal) dmAni.consultar(this);
+			if (ani != null) {
+				String info = "Animal "+ani.getIdAnimal()+
+						"\nNome: "+ani.getNome()+
+						"\nEspécie: "+ani.getEspecie()+
+						"\nRaça: "+ani.getRaca()+
+						"\nSexo: "+ani.getSexo()+
+						"\nIdade: "+ani.getIdade();
+				JOptionPane.showMessageDialog(null,"Animal encontrado!\n"+info,"Sucesso!",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("../Clinica_Veterinaria/src/Images/pata_icone.png"));
+				return true;
+			}
+			
+			JOptionPane.showMessageDialog(null, "Animal não encontrado!","Erro de Busca", JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
 		
-		JOptionPane.showMessageDialog(null, "Animal não encontrado!","Mensagem de erro", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Não há nenhum Cliente com esse CPF.", "Erro de Busca", JOptionPane.ERROR_MESSAGE);
 		return false;
+	}
+	
+	public void excluir()
+	{
+		if (this.proprietario.buscar(false))
+		{
+			Connect();
+			Animal objAni = (Animal) dmAni.consultar(this);
+			System.out.println(objAni);
+			if (objAni != null)
+			{
+				dmAni.excluir(this);
+				JOptionPane.showMessageDialog(null, "Animal Exluído com sucesso!");
+			}
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Não há nenhum Cliente com esse CPF.", "Erro de Busca", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }
