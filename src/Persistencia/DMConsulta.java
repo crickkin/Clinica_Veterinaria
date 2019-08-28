@@ -44,7 +44,7 @@ public class DMConsulta extends DMGeral
 		Consulta objCli = (Consulta) obj;
 		try {   
 			Statement statement = getConnection().createStatement();
-            String consultarSQL = "SELECT * FROM cliente WHERE (cpf = '"+objCli.getCpf()+"')";
+            String consultarSQL = "SELECT * FROM cliente WHERE (cpf = '"+objCli.getHora()+"')";
             System.out.println("Enviando código SQL: " + getConnection().nativeSQL(consultarSQL));
             ResultSet result = statement.executeQuery(consultarSQL);
             if (result.next()) {
@@ -118,6 +118,7 @@ public class DMConsulta extends DMGeral
         	id = 0;
         }
 		return id;*/
+		return 0;
 	}
 
 	public void excluir(Object obj) {
