@@ -49,11 +49,20 @@ public class Cirurgia extends Procedimento
 		this.duracao = duracao;
 	}
 	
+	public int getIdCirurgia() 
+	{
+		return duracao;
+	}
+	public void setIdCirurgia(int id) 
+	{
+		this.idCirurgia = id;
+	}
+	
 	//Methods
 	void Connect()
 	{
-		dmCon = new DMConsulta();
-		dmCon.conectaDataBase();
+		dmCir = new DMCirurgia();
+		dmCir.conectaDataBase();
 		System.out.println("Conexão com a tabela Consulta estabelecida com sucesso");
 	}
 	
@@ -68,9 +77,9 @@ public class Cirurgia extends Procedimento
 			}
 			else
 			{
-				if (dmCon.consultar(this) == null)
+				if (dmCir.consultar(this) == null)
 				{
-					dmCon.incluir(this);
+					dmCir.incluir(this);
 				}
 				else
 				{
@@ -87,16 +96,16 @@ public class Cirurgia extends Procedimento
 	public Boolean buscar()
 	{
 		Connect();
-		Consulta con = (Consulta) dmCon.consultar(this);
-		if (con != null)
+		Cirurgia cir = (Cirurgia) dmCir.consultar(this);
+		if (cir != null)
 		{
-			String info = "Consulta "+con.getIdConsulta()+
-					"\nData: "+con.getData()+
-					"\nHora: "+con.getHora()+
-					"\nVeterinario: "+con.getVeterinario().getNome()+
-					"\nAnimal: "+con.getAnimal().getNome()+
-					"\nSintomas: "+con.getSintomas()+
-					"\nConsulta: "+con.getDiagnostico();
+			String info = "Cirurgia "+cir.getIdCirurgia()+
+					"\nData: "+cir.getData()+
+					"\nHora: "+cir.getHora()+
+					"\nVeterinario: "+cir.getVeterinario().getNome()+
+					"\nAnimal: "+cir.getAnimal().getNome()+
+					"\nGrau: "+cir.getUrgencia()+
+					"\nSituacao: "+cir.getSituacao();
 			
 			JOptionPane.showMessageDialog(null, "Consulta encontrada!\n"+info, "Sucesso!", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("../Clinica_Veterinaria/src/Images/agendamento_icone.png"));
 			return true;
