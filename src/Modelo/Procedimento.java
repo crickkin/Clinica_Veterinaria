@@ -15,6 +15,12 @@ public abstract class Procedimento
 		this.veterinario = new Funcionario(cpfVeterinario).find();
 	}
 	
+	public Procedimento(String data, String hora)
+	{
+		this.data = data;
+		this.hora = hora;
+	}
+	
 	//Setters 'n Getters
 	public String getData() 
 	{

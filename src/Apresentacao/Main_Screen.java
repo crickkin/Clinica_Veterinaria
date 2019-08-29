@@ -76,6 +76,10 @@ public class Main_Screen extends JFrame
 				    {
 				    	new Consulta_Screen();
 				    }
+				    else if (response == 1)
+				    {
+				    	new Cirurgia_Screen();
+				    }
 				}
 			}
 		}

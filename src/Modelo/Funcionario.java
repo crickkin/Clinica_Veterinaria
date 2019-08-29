@@ -169,25 +169,23 @@ public class Funcionario
 		return null;
 	}
 	
-	public Funcionario findById() {
-		if (!this.cpf.equals(""))
-		{
-			Funcionario fun = (Funcionario) dmFun.consultaID(this);
-			if (fun != null) {
-				String info = "Funcionario "+fun.getIdFunc()+
-						"\nNome: "+fun.getNome()+
-						"\nCPF: "+fun.getCpf()+
-						"\nCTPS: "+fun.getCtps()+
-						"\nRG: "+fun.getRg()+
-						"\nData de Nascimento: "+fun.getDtNascimento()+
-						"\nGênero: "+fun.getGenero()+
-						"\nSalário: "+fun.getSalario()+
-						"\nData de Contratação: "+fun.getDtContratacao();
-				System.out.println(info);
-				
-				return fun;
-			}
-		}
+	public Funcionario findById() 
+	{
+		Funcionario fun = (Funcionario) dmFun.consultaID(this);
+		if (fun != null) {
+			String info = "Funcionario "+fun.getIdFunc()+
+					"\nNome: "+fun.getNome()+
+					"\nCPF: "+fun.getCpf()+
+					"\nCTPS: "+fun.getCtps()+
+					"\nRG: "+fun.getRg()+
+					"\nData de Nascimento: "+fun.getDtNascimento()+
+					"\nGênero: "+fun.getGenero()+
+					"\nSalário: "+fun.getSalario()+
+					"\nData de Contratação: "+fun.getDtContratacao();
+			System.out.println(info);
+			
+			return fun;
+		}	
 		return null;
 	}
 	

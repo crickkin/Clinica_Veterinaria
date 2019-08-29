@@ -14,8 +14,8 @@ public class Animal_Screen extends JFrame
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel pCadastro, pBusca;
-	private JLabel lNome, lRaca, lEspecie, lSexo, lIdade, lProprietario, lCpfBusca, lNomePesquisa;
-	private JTextField tNome, tRaca, tEspecie, tSexo, tIdade, tProprietario, tCpfBusca, tNomePesquisa;
+	private JLabel lNome, lRaca, lEspecie, lSexo, lProprietario, lCpfBusca, lNomePesquisa;
+	private JTextField tNome, tRaca, tEspecie, tSexo, tProprietario, tCpfBusca, tNomePesquisa;
 	private JButton bSalvar, bListar, bBuscar, bLimpar, bExcluir, bLimparCpf, bFechar;
 	
 	String nome, raca, especie, proprietario, cpfBusca, nomePesquisa;
@@ -42,10 +42,9 @@ public class Animal_Screen extends JFrame
 					raca = tRaca.getText();
 					especie = tEspecie.getText();
 					sexo = tSexo.getText().charAt(0);
-					idade = Integer.parseInt(tIdade.getText());
 					proprietario = tProprietario.getText();
 					
-					objSalvar = new Animal(nome,raca,especie, sexo, idade, proprietario);
+					objSalvar = new Animal(nome,raca,especie, sexo, proprietario);
 					objSalvar.incluir(objSalvar);
 				}
 				
@@ -55,7 +54,6 @@ public class Animal_Screen extends JFrame
 					tSexo.setText("");
 					tEspecie.setText("");
 					tProprietario.setText("");
-					tIdade.setText("");
 				}
 				
 				if (e.getSource() == bLimparCpf) {
@@ -134,21 +132,13 @@ public class Animal_Screen extends JFrame
 		tSexo.setSize(15,20);
 		tSexo.setLocation(190,115);
 		
-		lIdade = new JLabel("Idade: ");
-		lIdade.setSize(150,30);
-		lIdade.setLocation(20,140);
-		
-		tIdade = new JTextField();
-		tIdade.setSize(50,20);
-		tIdade.setLocation(190,145);
-		
 		lProprietario = new JLabel("Proprietário(CPF): ");
 		lProprietario.setSize(150,30);
-		lProprietario.setLocation(20,170);
+		lProprietario.setLocation(20,140);
 		
 		tProprietario = new JTextField();
 		tProprietario.setSize(150,20);
-		tProprietario.setLocation(190,175);
+		tProprietario.setLocation(190,145);
 		
 		lNomePesquisa = new JLabel("Nome do Animal: ");
 		lNomePesquisa.setSize(150,30);
@@ -237,9 +227,6 @@ public class Animal_Screen extends JFrame
 		
 		pCadastro.add(lSexo);
 		pCadastro.add(tSexo);
-		
-		pCadastro.add(lIdade);
-		pCadastro.add(tIdade);
 		
 		pCadastro.add(lProprietario);
 		pCadastro.add(tProprietario);

@@ -6,9 +6,11 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
-import Modelo.*;
+import Modelo.Animal;
+import Modelo.Consulta;
+import Modelo.Funcionario;
 
-public class DMConsulta extends DMGeral
+public class DMCirurgia extends DMGeral
 {
 	public void incluir(Object obj) {
 		Consulta objCon = (Consulta) obj;
@@ -96,35 +98,6 @@ public class DMConsulta extends DMGeral
         	System.out.println("Problemas com o SQL de exclusão do consulta !"); 
         }
 	}
-
-	public void alterar(Object obj) {
-//		Cliente objCli = (Cliente) obj;
-//        try
-//        {   
-//        	System.out.println(objCli.getNome());
-//        	Statement statement = getConnection().createStatement();
-//            String alterarSQL = "UPDATE clientes SET cpf = '"+objCli.getCpf()+"' ,"+
-//                                "nome = '"+objCli.getNome()+"' ,"+
-//                                "telefone = '"+objCli.getTelefone()+"'"+
-//                                "email = '"+objCli.getEmail()+"'"+
-//                                "WHERE (cpf = '"+objCli.getCpf()+"')";
-//            System.out.println("Enviando cï¿½digo SQL: " + getConnection().nativeSQL(alterarSQL) + "\n");
-//            int result = statement.executeUpdate(alterarSQL);
-//            if (result == 1)
-//            { 
-//            	System.out.println( "\nCliente alterado com sucesso!"); 
-//            }
-//            else
-//            {   
-//            	System.out.println( "\nErro ao alterar cliente !\n" );
-//                objCli = null;
-//            }
-//        }
-//        catch (SQLException e)
-//        { 
-//        	System.out.println("Problemas com o SQL de atualizaï¿½ï¿½o do cliente !"); 
-//        }
-	}
 	
 	public void shutDown()
     {   try
@@ -137,4 +110,8 @@ public class DMConsulta extends DMGeral
             sqlex.printStackTrace();
         }
     }
+
+	public void alterar(Object obj) {
+		// TODO Auto-generated method stub
+	}
 }

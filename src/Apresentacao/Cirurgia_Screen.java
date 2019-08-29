@@ -5,22 +5,22 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Consulta_Screen extends JFrame
+public class Cirurgia_Screen extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 	
-	private JLabel lData, lHora, lNomeVeterinario, lNomeAnimal, lCpfCliente, lSintomas, lDiagnostico, lDtBusca, lHrBusca;
-	private JTextField tData, tHora, tNomeVeterinario, tNomeAnimal, tCpfCliente, tSintomas, tDiagnostico, tDtBusca, tHrBusca;
+	private JLabel lData, lHora, lNomeVeterinario, lNomeAnimal, lCpfCliente, lUrgencia, lSituacao, lDuracao, lDtBusca, lHrBusca;
+	private JTextField tData, tHora, tNomeVeterinario, tNomeAnimal, tCpfCliente, tUrgencia, tSituacao, tDuracao, tDtBusca, tHrBusca;
 	private JButton bMarcar, bLimpar, bListar, bBuscar, bExcluir, bEditar, bCancelar, bLimparDtHr;
 	private JPanel pFormulario, pBusca;
 	
-	String data, hora, nomeVeterinario, nomeAnimal, cpfCliente, sintomas, diagnostico, dtBusca, hrBusca;
-	Consulta objCon, objSalvar;
+	String data, hora, nomeVeterinario, nomeAnimal, cpfCliente, urgencia, duracao, situacao, dtBusca, hrBusca;
+	Cirurgia objCir, objSalvar;
 	
-	public Consulta_Screen()
+	public Cirurgia_Screen()
 	{
 		this.setSize(630, 460);
-		this.setTitle("Marcar Consulta");
+		this.setTitle("Marcar Cirurgia");
 		this.setResizable(false);
 		this.setLayout(null);
 		
@@ -36,9 +36,10 @@ public class Consulta_Screen extends JFrame
 					nomeVeterinario = tNomeVeterinario.getText();
 					nomeAnimal = tNomeAnimal.getText();
 					cpfCliente = tCpfCliente.getText();
-					sintomas = tSintomas.getText();
-					diagnostico = tDiagnostico.getText();
-					objSalvar = new Consulta(data, hora, nomeVeterinario, nomeAnimal, cpfCliente, sintomas, diagnostico);	
+					urgencia = tUrgencia.getText();
+					situacao = tSituacao.getText();
+					duracao = tDuracao.getText();
+					objSalvar = new Cirurgia(data, hora, nomeVeterinario, nomeAnimal, cpfCliente, urgencia, situacao, duracao);	
 					objSalvar.incluir();
 					dispose();
 				}
@@ -48,8 +49,8 @@ public class Consulta_Screen extends JFrame
 					tHora.setText("");
 					tNomeVeterinario.setText("");
 					tNomeAnimal.setText("");
-					tSintomas.setText("");
-					tDiagnostico.setText("");
+					/*tSintomas.setText("");
+					tDiagnostico.setText("");*/
 				}
 				
 				if (e.getSource() == bLimparDtHr) {
@@ -60,16 +61,16 @@ public class Consulta_Screen extends JFrame
 				if (e.getSource() == bBuscar) {
 					dtBusca = tDtBusca.getText();
 					hrBusca = tHrBusca.getText();
-					objCon = new Consulta(dtBusca, hrBusca);
-					objCon.buscar();
+					/*objCon = new Consulta(dtBusca, hrBusca);
+					objCon.buscar();*/
 				}
 				
 				if (e.getSource() == bExcluir) 
 				{
 					dtBusca = tDtBusca.getText();
 					hrBusca = tHrBusca.getText();
-					objCon = new Consulta(dtBusca, hrBusca);
-					objCon.excluir();
+					/*objCon = new Consulta(dtBusca, hrBusca);
+					objCon.excluir();*/
 				}
 				
 				if (e.getSource() == bCancelar) {
@@ -83,7 +84,7 @@ public class Consulta_Screen extends JFrame
 		pFormulario = new JPanel();
 		pFormulario.setSize(610,230);
 		pFormulario.setLocation(10,10);
-		pFormulario.setBorder(BorderFactory.createTitledBorder("Formulário de Consulta:"));
+		pFormulario.setBorder(BorderFactory.createTitledBorder("Formulário de Cirurgia:"));
 		pFormulario.setLayout(null);
 		
 		pBusca = new JPanel();
@@ -92,7 +93,7 @@ public class Consulta_Screen extends JFrame
 		pBusca.setBorder(BorderFactory.createTitledBorder("Busca e Exclusão"));
 		pBusca.setLayout(null);
 		
-		lData = new JLabel("Data da Consulta: ");
+		lData = new JLabel("Data da Cirurgia: ");
 		lData.setSize(150,30);
 		lData.setLocation(70,20);
 		
@@ -100,7 +101,7 @@ public class Consulta_Screen extends JFrame
 		tData.setSize(90,20);
 		tData.setLocation(190,25);
 		
-		lHora = new JLabel("Hora da Consulta: ");
+		lHora = new JLabel("Hora da Cirurgia: ");
 		lHora.setSize(150,30);
 		lHora.setLocation(290,20);
 		
@@ -132,23 +133,23 @@ public class Consulta_Screen extends JFrame
 		tCpfCliente.setSize(90,20);
 		tCpfCliente.setLocation(460,85);
 		
-		lSintomas = new JLabel("Sintomas: ");
-		lSintomas.setSize(150,30);
-		lSintomas.setLocation(70,110);
+		lUrgencia = new JLabel("Grau de Urgência: ");
+		lUrgencia.setSize(150,30);
+		lUrgencia.setLocation(70,110);
 		
-		tSintomas = new JTextField();
-		tSintomas.setSize(270,20);
-		tSintomas.setLocation(210,115);
+		tUrgencia = new JTextField();
+		tUrgencia.setSize(270,20);
+		tUrgencia.setLocation(210,115);
 		
-		lDiagnostico = new JLabel("Diagnóstico: ");
-		lDiagnostico.setSize(150,30);
-		lDiagnostico.setLocation(70,140);
+		lSituacao = new JLabel("Situação: ");
+		lSituacao.setSize(150,30);
+		lSituacao.setLocation(70,140);
 		
-		tDiagnostico = new JTextField();
-		tDiagnostico.setSize(270,20);
-		tDiagnostico.setLocation(210,145);
+		tSituacao = new JTextField();
+		tSituacao.setSize(270,20);
+		tSituacao.setLocation(210,145);
 		
-		lDtBusca = new JLabel("Data da Consulta: ");
+		lDtBusca = new JLabel("Data da Cirurgia: ");
 		lDtBusca.setSize(150, 30);
 		lDtBusca.setLocation(30, 20);
 		
@@ -156,7 +157,7 @@ public class Consulta_Screen extends JFrame
 		tDtBusca.setSize(90, 20);
 		tDtBusca.setLocation(150, 25);
 		
-		lHrBusca = new JLabel("Hora da Consulta: ");
+		lHrBusca = new JLabel("Hora da Cirurgia: ");
 		lHrBusca.setSize(150, 30);
 		lHrBusca.setLocation(270, 20);
 		
@@ -223,11 +224,11 @@ public class Consulta_Screen extends JFrame
 		pFormulario.add(lCpfCliente);
 		pFormulario.add(tCpfCliente);
 		
-		pFormulario.add(lSintomas);
-		pFormulario.add(tSintomas);
+		pFormulario.add(lUrgencia);
+		pFormulario.add(tUrgencia);
 		
-		pFormulario.add(lDiagnostico);
-		pFormulario.add(tDiagnostico);
+		pFormulario.add(lSituacao);
+		pFormulario.add(tSituacao);
 		
 		pFormulario.add(bMarcar);
 		pFormulario.add(bLimpar);

@@ -9,7 +9,6 @@ public class Animal
 {
 	private String nome, raca, especie;
 	private char sexo;
-	private int idade;
 	private Cliente proprietario;
 	
 	private int idAnimal;
@@ -17,13 +16,12 @@ public class Animal
 	private DMAnimal dmAni;
 	
 	//Construct
-	public Animal(String nome, String raca, String especie, char sexo, int idade, String cpfProprietario)
+	public Animal(String nome, String raca, String especie, char sexo, String cpfProprietario)
 	{
 		this.nome = nome;
 		this.raca = raca;
 		this.especie = especie;
 		this.sexo = sexo;
-		this.idade = idade;
 		this.proprietario = new Cliente(cpfProprietario);
 	}
 	
@@ -83,15 +81,6 @@ public class Animal
 		this.proprietario = proprietario;
 	}
 	
-	public int getIdade() 
-	{
-		return idade;
-	}
-	public void setIdade(int idade) 
-	{
-		this.idade = idade;
-	}
-	
 	public int getIdAnimal() 
 	{
 		return idAnimal;
@@ -146,8 +135,7 @@ public class Animal
 						"\nNome: "+ani.getNome()+
 						"\nEspécie: "+ani.getEspecie()+
 						"\nRaça: "+ani.getRaca()+
-						"\nSexo: "+ani.getSexo()+
-						"\nIdade: "+ani.getIdade();
+						"\nSexo: "+ani.getSexo();
 				JOptionPane.showMessageDialog(null,"Animal encontrado!\n"+info,"Sucesso!",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("../Clinica_Veterinaria/src/Images/pata_icone.png"));
 				return true;
 			}
@@ -172,8 +160,7 @@ public class Animal
 						"\nNome: "+ani.getNome()+
 						"\nEspécie: "+ani.getEspecie()+
 						"\nRaça: "+ani.getRaca()+
-						"\nSexo: "+ani.getSexo()+
-						"\nIdade: "+ani.getIdade();
+						"\nSexo: "+ani.getSexo();
 				return ani;
 			}
 			return null;
@@ -183,21 +170,17 @@ public class Animal
 	
 	public Animal findById()
 	{
-		if (this.proprietario.buscar(false))
+		System.out.println("Yowzah");
+		Connect();
+		Animal ani = (Animal) dmAni.consultaID(this);
+		if (ani != null) 
 		{
-			Connect();
-			Animal ani = (Animal) dmAni.consultaID(this);
-			if (ani != null) 
-			{
-				String info = "Animal "+ani.getIdAnimal()+
-						"\nNome: "+ani.getNome()+
-						"\nEspécie: "+ani.getEspecie()+
-						"\nRaça: "+ani.getRaca()+
-						"\nSexo: "+ani.getSexo()+
-						"\nIdade: "+ani.getIdade();
-				return ani;
-			}
-			return null;
+			String info = "Animal "+ani.getIdAnimal()+
+					"\nNome: "+ani.getNome()+
+					"\nEspécie: "+ani.getEspecie()+
+					"\nRaça: "+ani.getRaca()+
+					"\nSexo: "+ani.getSexo();
+			return ani;
 		}
 		return null;
 	}
