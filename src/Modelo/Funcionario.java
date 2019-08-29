@@ -113,10 +113,21 @@ public class Funcionario
 	public Funcionario(String cpf)
 	{
 		this.cpf = cpf;
+		Connect();
+	}
+	
+	public Funcionario(int id)
+	{
+		this.idFunc = id;
+		Connect();
+	}
+	
+	void Connect()
+	{
 		dmFun = new DMFuncionario();
     	dmFun.conectaDataBase();
     	System.out.println("Conexão com a tabela Funcionario feita com sucesso!");
-	}	
+	}
 	
 	public void buscar(Funcionario objFun) {
 		Funcionario fun = (Funcionario) dmFun.consultar(this);
@@ -140,6 +151,28 @@ public class Funcionario
 		if (!this.cpf.equals(""))
 		{
 			Funcionario fun = (Funcionario) dmFun.consultar(this);
+			if (fun != null) {
+				String info = "Funcionario "+fun.getIdFunc()+
+						"\nNome: "+fun.getNome()+
+						"\nCPF: "+fun.getCpf()+
+						"\nCTPS: "+fun.getCtps()+
+						"\nRG: "+fun.getRg()+
+						"\nData de Nascimento: "+fun.getDtNascimento()+
+						"\nGênero: "+fun.getGenero()+
+						"\nSalário: "+fun.getSalario()+
+						"\nData de Contratação: "+fun.getDtContratacao();
+				System.out.println(info);
+				
+				return fun;
+			}
+		}
+		return null;
+	}
+	
+	public Funcionario findById() {
+		if (!this.cpf.equals(""))
+		{
+			Funcionario fun = (Funcionario) dmFun.consultaID(this);
 			if (fun != null) {
 				String info = "Funcionario "+fun.getIdFunc()+
 						"\nNome: "+fun.getNome()+

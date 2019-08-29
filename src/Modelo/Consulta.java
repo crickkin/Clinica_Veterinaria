@@ -1,10 +1,13 @@
 package Modelo;
 
+import javax.swing.JOptionPane;
+
 import Persistencia.DMConsulta;
 
 public class Consulta extends Procedimento
 {
 	private String sintomas, diagnostico;
+	private int idConsulta;
 	
 	private DMConsulta dmCon;
 
@@ -35,14 +38,47 @@ public class Consulta extends Procedimento
 		this.diagnostico = diagnostico;
 	}
 	
+	public int getIdConsulta() 
+	{
+		return idConsulta;
+	}
+	public void setIdConsulta(int id) 
+	{
+		this.idConsulta = id;
+	}
+	
 	//Methods
-	public void incluir(Consulta objCon)
+	void Connect()
+	{
+		dmCon = new DMConsulta();
+		dmCon.conectaDataBase();
+		System.out.println("Conexão com a tabela Consulta estabelecida com sucesso");
+	}
+	
+	public void incluir()
 	{
 		if (this.animal != null && this.veterinario != null)
 		{
-			dmCon = new DMConsulta();
-			dmCon.conectaDataBase();
-			System.out.println("Conexão com a tabela Consulta estabelecida com sucesso");
+			Connect();
+			if (this.data == null || this.hora == null)
+			{
+				JOptionPane.showMessageDialog(null, "Os campos Data e Hora são obrigatórios.", "Erro de Preenchimento", JOptionPane.ERROR_MESSAGE);
+			}
+			else
+			{
+				if (dmCon.consultar(this) == null)
+				{
+					dmCon.incluir(this);
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Já existe uma consulta nessa hora e data.", "Erro ao Marcar", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Animal ou Veterinário inexistentes no banco de dados", "Erro de parâmetros", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }

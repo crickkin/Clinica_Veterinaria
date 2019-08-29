@@ -64,6 +64,34 @@ public class DMAnimal extends DMGeral {
         }
 		return objAni;
 	}
+	
+	public Object consultaID(Object obj) {
+		Animal objAni = (Animal) obj;
+		System.out.println(objAni.getNome());
+		try {   
+			Statement statement = getConnection().createStatement();
+            String consultarSQL = "SELECT * FROM animal WHERE (animal.id_animal = '"+objAni.getIdAnimal()+"')";
+            System.out.println("Enviando codigo SQL: " + getConnection().nativeSQL(consultarSQL));
+            ResultSet result = statement.executeQuery(consultarSQL);
+            if (result.next()) {
+            	System.out.println("\nAnimal encontrado");
+            	objAni.setIdAnimal(result.getInt("id_animal"));
+            	objAni.setNome(result.getString("nome"));
+            	objAni.setRaca(result.getString("raca"));
+            	objAni.setEspecie(result.getString("especie"));
+            	objAni.setSexo(result.getString("sexo").charAt(0));
+                result.close();
+            } else {   
+            	System.out.println("\nAnimal não encontrado");
+                objAni = null;
+            }
+            statement.close();
+        }
+        catch (SQLException e) { 
+        	System.out.println("Problemas com o SQL de consulta de Animal!"); 
+        }
+		return objAni;
+	}
 
 	public void excluir(Object obj)
 	{

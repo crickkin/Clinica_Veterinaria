@@ -31,7 +31,11 @@ public class Animal
 	{
 		this.nome = nome;
 		this.proprietario = new Cliente(cpfProprietario);
-		
+	}
+	
+	public Animal(int id)
+	{
+		this.idAnimal = id;
 	}
 	
 	//Setters 'n Getters
@@ -104,6 +108,7 @@ public class Animal
 		dmAni.conectaDataBase();
 		System.out.println("Conexão com a tabela Animal feita com sucesso!");
 	}
+	
 	public void incluir(Animal objAni)
 	{
 		if (this.proprietario.buscar(false))
@@ -161,6 +166,27 @@ public class Animal
 		{
 			Connect();
 			Animal ani = (Animal) dmAni.consultar(this);
+			if (ani != null) 
+			{
+				String info = "Animal "+ani.getIdAnimal()+
+						"\nNome: "+ani.getNome()+
+						"\nEspécie: "+ani.getEspecie()+
+						"\nRaça: "+ani.getRaca()+
+						"\nSexo: "+ani.getSexo()+
+						"\nIdade: "+ani.getIdade();
+				return ani;
+			}
+			return null;
+		}
+		return null;
+	}
+	
+	public Animal findById()
+	{
+		if (this.proprietario.buscar(false))
+		{
+			Connect();
+			Animal ani = (Animal) dmAni.consultaID(this);
 			if (ani != null) 
 			{
 				String info = "Animal "+ani.getIdAnimal()+

@@ -39,7 +39,7 @@ public class Consulta_Screen extends JFrame
 					sintomas = tSintomas.getText();
 					diagnostico = tDiagnostico.getText();
 					objSalvar = new Consulta(data, hora, nomeVeterinario, nomeAnimal, cpfCliente, sintomas, diagnostico);	
-					objSalvar.incluir(objSalvar);
+					objSalvar.incluir();
 					dispose();
 				}
 				
@@ -117,7 +117,7 @@ public class Consulta_Screen extends JFrame
 		tHora.setSize(70,20);
 		tHora.setLocation(410,25);
 		
-		lNomeVeterinario = new JLabel("Nome do Veterinario: ");
+		lNomeVeterinario = new JLabel("CPF do Veterinario: ");
 		lNomeVeterinario.setSize(150,30);
 		lNomeVeterinario.setLocation(70,50);
 		

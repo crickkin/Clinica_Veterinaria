@@ -4,7 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import Modelo.Consulta;
+import javax.swing.JOptionPane;
+
+import Modelo.*;
 
 public class DMConsulta extends DMGeral
 {
@@ -12,18 +14,19 @@ public class DMConsulta extends DMGeral
 		Consulta objCon = (Consulta) obj;
 		try {   
 			Statement statement = getConnection().createStatement();
-            String incluirSQL = "INSERT INTO cliente (data, hora, sintomas, diagnostico, id_funcionario, id_animal)"
+            String incluirSQL = "INSERT INTO consulta (data, hora, sintomas, diagnostico, id_funcionario, id_animal)"
             					+ " VALUES ('" +
                                 objCon.getData() + "', '" +
                                 objCon.getHora() + "', '" +
                                 objCon.getSintomas() + "', '" +
-                                objCon.getDiagnostico() + "', '"+
-                                objCon.getVeterinario().getIdFunc() + "', '"+
-                                objCon.getAnimal().getIdAnimal() + "')";
+                                objCon.getDiagnostico() + "', "+
+                                objCon.getVeterinario().getIdFunc() + ", "+
+                                objCon.getAnimal().getIdAnimal() + ")";
             System.out.println("Enviando codigo SQL: " + getConnection().nativeSQL(incluirSQL) + "\n");
             int result = statement.executeUpdate(incluirSQL);
             if (result == 1) {   
             	System.out.println("\nConsulta marcada com sucesso!");
+            	JOptionPane.showMessageDialog(null, "Consulta marcada com sucesso!");
             } else {   
             	System.out.println("\nErro ao marcar consulta!");
             	objCon.setData("");
@@ -41,30 +44,32 @@ public class DMConsulta extends DMGeral
     }
 
 	public Object consultar(Object obj) {
-		Consulta objCli = (Consulta) obj;
+		Consulta objCon = (Consulta) obj;
 		try {   
 			Statement statement = getConnection().createStatement();
-            String consultarSQL = "SELECT * FROM cliente WHERE (cpf = '"+objCli.getHora()+"')";
+            String consultarSQL = "SELECT * FROM consulta WHERE (data = '"+objCon.getData()+"'AND hora = '"+objCon.getHora()+"')";
             System.out.println("Enviando código SQL: " + getConnection().nativeSQL(consultarSQL));
             ResultSet result = statement.executeQuery(consultarSQL);
             if (result.next()) {
-            	System.out.println("\nCliente encontrado!");
-            	/*objCli.setIdCliente(result.getInt("id_cliente"));
-            	objCli.setNome(result.getString("nome"));
-            	objCli.setCpf(result.getString("cpf"));
-            	objCli.setTelefone(result.getString("telefone"));
-            	objCli.setEmail(result.getString("email"));*/
+            	System.out.println("\nConsulta encontrado!");
+            	objCon.setIdConsulta(result.getInt("id_consulta"));
+            	objCon.setData(result.getString("data"));
+            	objCon.setHora(result.getString("hora"));
+            	objCon.setSintomas(result.getString("sintomas"));
+            	objCon.setDiagnostico(result.getString("diagnostico"));
+            	objCon.setAnimal(new Animal(result.getInt("id_animal")).findById());
+            	objCon.setVeterinario(new Funcionario(result.getInt("id_funcionario")).findById());
                 result.close();
             } else {   
-            	System.out.println("\nCliente não encontrado!");
-                objCli = null;
+            	System.out.println("\nConsulta não encontrado!");
+                objCon = null;
             }
             statement.close();
         }
         catch (SQLException e) { 
         	System.out.println("Problemas com o SQL de consulta de Cliente!"); 
         }
-		return objCli;
+		return objCon;
 	}
 	
 //	public String buscar(Object obj) {
