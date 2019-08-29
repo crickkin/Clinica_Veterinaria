@@ -14,7 +14,8 @@ public class Cirurgia_Screen extends JFrame
 	private JButton bMarcar, bLimpar, bListar, bBuscar, bExcluir, bEditar, bCancelar, bLimparDtHr;
 	private JPanel pFormulario, pBusca;
 	
-	String data, hora, nomeVeterinario, nomeAnimal, cpfCliente, urgencia, duracao, situacao, dtBusca, hrBusca;
+	String data, hora, nomeVeterinario, nomeAnimal, cpfCliente, situacao, dtBusca, hrBusca;
+	int urgencia, duracao;
 	Cirurgia objCir, objSalvar;
 	
 	public Cirurgia_Screen()
@@ -36,9 +37,9 @@ public class Cirurgia_Screen extends JFrame
 					nomeVeterinario = tNomeVeterinario.getText();
 					nomeAnimal = tNomeAnimal.getText();
 					cpfCliente = tCpfCliente.getText();
-					urgencia = tUrgencia.getText();
+					urgencia = Integer.parseInt(tUrgencia.getText());
 					situacao = tSituacao.getText();
-					duracao = tDuracao.getText();
+					duracao = Integer.parseInt(tDuracao.getText());
 					objSalvar = new Cirurgia(data, hora, nomeVeterinario, nomeAnimal, cpfCliente, urgencia, situacao, duracao);	
 					objSalvar.incluir();
 					dispose();
@@ -49,8 +50,9 @@ public class Cirurgia_Screen extends JFrame
 					tHora.setText("");
 					tNomeVeterinario.setText("");
 					tNomeAnimal.setText("");
-					/*tSintomas.setText("");
-					tDiagnostico.setText("");*/
+					tUrgencia.setText("");
+					tSituacao.setText("");
+					tDuracao.setText("");
 				}
 				
 				if (e.getSource() == bLimparDtHr) {
@@ -143,11 +145,19 @@ public class Cirurgia_Screen extends JFrame
 		
 		lSituacao = new JLabel("Situação: ");
 		lSituacao.setSize(150,30);
-		lSituacao.setLocation(70,140);
+		lSituacao.setLocation(20,140);
 		
 		tSituacao = new JTextField();
-		tSituacao.setSize(270,20);
-		tSituacao.setLocation(210,145);
+		tSituacao.setSize(210,20);
+		tSituacao.setLocation(90,145);
+		
+		lDuracao = new JLabel("Duração: ");
+		lDuracao.setSize(150,30);
+		lDuracao.setLocation(320,140);
+		
+		tDuracao = new JTextField();
+		tDuracao.setSize(100,20);
+		tDuracao.setLocation(390,145);
 		
 		lDtBusca = new JLabel("Data da Cirurgia: ");
 		lDtBusca.setSize(150, 30);
@@ -229,6 +239,9 @@ public class Cirurgia_Screen extends JFrame
 		
 		pFormulario.add(lSituacao);
 		pFormulario.add(tSituacao);
+		
+		pFormulario.add(lDuracao);
+		pFormulario.add(tDuracao);
 		
 		pFormulario.add(bMarcar);
 		pFormulario.add(bLimpar);

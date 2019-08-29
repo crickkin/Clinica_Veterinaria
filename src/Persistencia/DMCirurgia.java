@@ -7,95 +7,98 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 import Modelo.Animal;
-import Modelo.Consulta;
+import Modelo.Cirurgia;
 import Modelo.Funcionario;
 
 public class DMCirurgia extends DMGeral
 {
 	public void incluir(Object obj) {
-		Consulta objCon = (Consulta) obj;
+		Cirurgia objCir = (Cirurgia) obj;
 		try {   
 			Statement statement = getConnection().createStatement();
-            String incluirSQL = "INSERT INTO consulta (data, hora, sintomas, diagnostico, id_funcionario, id_animal)"
+            String incluirSQL = "INSERT INTO cirurgia (data, hora, grau_urgencia, situacao, duracao, id_funcionario, id_animal)"
             					+ " VALUES ('" +
-                                objCon.getData() + "', '" +
-                                objCon.getHora() + "', '" +
-                                objCon.getSintomas() + "', '" +
-                                objCon.getDiagnostico() + "', "+
-                                objCon.getVeterinario().getIdFunc() + ", "+
-                                objCon.getAnimal().getIdAnimal() + ")";
+                                objCir.getData() + "', '" +
+                                objCir.getHora() + "', '" +
+                                objCir.getUrgencia() + "', '" +
+                                objCir.getSituacao() + "', "+
+                                objCir.getDuracao() + ", "+
+                                objCir.getVeterinario().getIdFunc() + ", "+
+                                objCir.getAnimal().getIdAnimal() + ")";
             System.out.println("Enviando codigo SQL: " + getConnection().nativeSQL(incluirSQL) + "\n");
             int result = statement.executeUpdate(incluirSQL);
             if (result == 1) {   
-            	System.out.println("\nConsulta marcada com sucesso!");
-            	JOptionPane.showMessageDialog(null, "Consulta marcada com sucesso!");
+            	System.out.println("\nCirurgia marcada com sucesso!");
+            	JOptionPane.showMessageDialog(null, "Cirurgia marcada com sucesso!");
             } else {   
-            	System.out.println("\nErro ao marcar consulta!");
-            	objCon.setData("");
-                objCon.setHora("");
-                objCon.setSintomas("");
-                objCon.setDiagnostico("");
-                objCon.setVeterinario(null);
-                objCon.setAnimal(null);
+            	System.out.println("\nErro ao marcar cirurgia!");
+            	objCir.setData("");
+                objCir.setHora("");
+                objCir.setUrgencia(0);
+                objCir.setSituacao("");
+                objCir.setDuracao(0);
+                objCir.setVeterinario(null);
+                objCir.setAnimal(null);
             }
             statement.close();
         }
         catch (SQLException e) { 
-        	System.out.println("Problemas com o SQL de inclusão de Consulta!"); 
+        	System.out.println("Problemas com o SQL de inclusão de Cirurgia!"); 
         }
     }
 
 	public Object consultar(Object obj) {
-		Consulta objCon = (Consulta) obj;
+		Cirurgia objCir = (Cirurgia) obj;
 		try {   
 			Statement statement = getConnection().createStatement();
-            String consultarSQL = "SELECT * FROM consulta WHERE (data = '"+objCon.getData()+"' AND hora = '"+objCon.getHora()+"')";
-            System.out.println("Enviando código SQL: " + getConnection().nativeSQL(consultarSQL));
-            ResultSet result = statement.executeQuery(consultarSQL);
+            String CirurgiarSQL = "SELECT * FROM Cirurgia WHERE (data = '"+objCir.getData()+"' AND hora = '"+objCir.getHora()+"')";
+            System.out.println("Enviando código SQL: " + getConnection().nativeSQL(CirurgiarSQL));
+            ResultSet result = statement.executeQuery(CirurgiarSQL);
             if (result.next()) {
-            	System.out.println("\nConsulta encontrado!");
-            	objCon.setIdConsulta(result.getInt("id_consulta"));
-            	objCon.setData(result.getString("data"));
-            	objCon.setHora(result.getString("hora"));
-            	objCon.setSintomas(result.getString("sintomas"));
-            	objCon.setDiagnostico(result.getString("diagnostico"));
-            	objCon.setAnimal(new Animal(result.getInt("id_animal")).findById());
-            	objCon.setVeterinario(new Funcionario(result.getInt("id_funcionario")).findById());
+            	System.out.println("\nCirurgia encontrado!");
+            	objCir.setIdCirurgia(result.getInt("id_Cirurgia"));
+            	objCir.setData(result.getString("data"));
+            	objCir.setHora(result.getString("hora"));
+            	objCir.setUrgencia(result.getInt("grau_urgencia"));
+            	objCir.setSituacao(result.getString("situacao"));
+            	objCir.setDuracao(result.getInt("duracao"));
+            	objCir.setAnimal(new Animal(result.getInt("id_animal")).findById());
+            	objCir.setVeterinario(new Funcionario(result.getInt("id_funcionario")).findById());
                 result.close();
             } else {   
-            	System.out.println("\nConsulta não encontrado!");
-                objCon = null;
+            	System.out.println("\nCirurgia não encontrado!");
+                objCir = null;
             }
             statement.close();
         }
         catch (SQLException e) { 
-        	System.out.println("Problemas com o SQL de consulta de Cliente!"); 
+        	System.out.println("Problemas com o SQL de Cirurgia de Cliente!"); 
         }
-		return objCon;
+		return objCir;
 	}
 
 	public void excluir(Object obj) {
-		Consulta objCon = (Consulta) obj;
+		Cirurgia objCir = (Cirurgia) obj;
         try
         {   
         	Statement statement = getConnection().createStatement();
-            String excluirSQL = "DELETE FROM consulta WHERE (data = '"+objCon.getData()+"'AND hora = '"+objCon.getHora()+"')";
+            String excluirSQL = "DELETE FROM Cirurgia WHERE (data = '"+objCir.getData()+"'AND hora = '"+objCir.getHora()+"')";
             System.out.println("Enviando código SQL: " + getConnection().nativeSQL(excluirSQL) + "\n");
             int result = statement.executeUpdate(excluirSQL);
             if (result == 1)
             {   
-            	System.out.println("\nConsulta excluído com sucesso");
+            	System.out.println("\nCirurgia excluído com sucesso");
             }
             else
             {   
-            	System.out.println("\nErro ao excluir consulta");
-                objCon = null;
+            	System.out.println("\nErro ao excluir Cirurgia");
+                objCir = null;
             }
            statement.close();
         }
         catch (SQLException e)
         { 
-        	System.out.println("Problemas com o SQL de exclusão do consulta !"); 
+        	System.out.println("Problemas com o SQL de exclusão do Cirurgia !"); 
         }
 	}
 	

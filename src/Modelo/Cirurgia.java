@@ -7,26 +7,26 @@ import Persistencia.DMCirurgia;
 
 public class Cirurgia extends Procedimento
 {
-	private String urgencia, situacao;
-	private int duracao, idCirurgia;
+	private String situacao;
+	private int duracao, urgencia, idCirurgia;
 	
 	DMCirurgia dmCir;
 	
 	//Constructor
-	public Cirurgia(String data, String hora, String cpfVeterinario, String nomeAnimal, String cpfCliente ,String urgencia, String situacao, String duracao)
+	public Cirurgia(String data, String hora, String cpfVeterinario, String nomeAnimal, String cpfCliente ,int urgencia, String situacao, int duracao)
 	{
 		super(data, hora, cpfVeterinario, nomeAnimal, cpfCliente);
 		this.urgencia = urgencia;
 		this.situacao = situacao;
-		this.duracao = Integer.parseInt(duracao);
+		this.duracao = duracao;
 	}
 	
 	//Setters 'n Getters
-	public String getUrgencia() 
+	public int getUrgencia() 
 	{
 		return urgencia;
 	}
-	public void setUrgencia(String urgencia) 
+	public void setUrgencia(int urgencia) 
 	{
 		this.urgencia = urgencia;
 	}
@@ -51,7 +51,7 @@ public class Cirurgia extends Procedimento
 	
 	public int getIdCirurgia() 
 	{
-		return duracao;
+		return idCirurgia;
 	}
 	public void setIdCirurgia(int id) 
 	{
@@ -63,7 +63,7 @@ public class Cirurgia extends Procedimento
 	{
 		dmCir = new DMCirurgia();
 		dmCir.conectaDataBase();
-		System.out.println("Conexão com a tabela Consulta estabelecida com sucesso");
+		System.out.println("Conexão com a tabela Cirurgia estabelecida com sucesso");
 	}
 	
 	public void incluir()
@@ -83,7 +83,7 @@ public class Cirurgia extends Procedimento
 				}
 				else
 				{
-					JOptionPane.showMessageDialog(null, "Já existe uma consulta nessa hora e data.", "Erro ao Marcar", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Já existe uma cirurgia nessa hora e data.", "Erro ao Marcar", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}
