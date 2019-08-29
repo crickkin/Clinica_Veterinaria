@@ -21,6 +21,11 @@ public class Cirurgia extends Procedimento
 		this.duracao = duracao;
 	}
 	
+	public Cirurgia(String data, String hora)
+	{
+		super(data, hora);
+	}
+	
 	//Setters 'n Getters
 	public int getUrgencia() 
 	{
@@ -118,10 +123,10 @@ public class Cirurgia extends Procedimento
 	public void excluir()
 	{
 		Connect();
-		Consulta con = (Consulta) dmCir.consultar(this);
-		if (con != null)
+		Cirurgia cir = (Cirurgia) dmCir.consultar(this);
+		if (cir != null)
 		{
-			dmCir.excluir(con);
+			dmCir.excluir(cir);
 			JOptionPane.showMessageDialog(null, "Consulta excluído com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else

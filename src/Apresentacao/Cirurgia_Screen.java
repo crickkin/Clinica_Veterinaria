@@ -63,16 +63,16 @@ public class Cirurgia_Screen extends JFrame
 				if (e.getSource() == bBuscar) {
 					dtBusca = tDtBusca.getText();
 					hrBusca = tHrBusca.getText();
-					/*objCon = new Consulta(dtBusca, hrBusca);
-					objCon.buscar();*/
+					objCir = new Cirurgia(dtBusca, hrBusca);
+					objCir.buscar();
 				}
 				
 				if (e.getSource() == bExcluir) 
 				{
 					dtBusca = tDtBusca.getText();
 					hrBusca = tHrBusca.getText();
-					/*objCon = new Consulta(dtBusca, hrBusca);
-					objCon.excluir();*/
+					objCir = new Cirurgia(dtBusca, hrBusca);
+					objCir.excluir();
 				}
 				
 				if (e.getSource() == bCancelar) {
